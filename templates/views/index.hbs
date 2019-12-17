@@ -5,17 +5,36 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     <link rel="stylesheet" href="css/permanent.css">
-</head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.3/lottie.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkG702RFFEEm08CP87sLK_amm-ru_eUVs&libraries=places&language=he"></script>
 
 <body>
+
+    <div id="locationAnimation"></div>
+    {{!-- <script src="js/delivery.js"></script> --}}
+    
+    <img src="img/location1.png" id="populationImg">
+    
+    
+
     {{>searchBox}}
+
+
     <div class="waveAnimation waveWrapper" >    
             <div class="wave waveTop" style="background-image: url('./img/wave-top.png')"></div>
             <div class="wave waveMiddle" style="background-image: url('./img/wave-mid.png')"></div>
             <div class="wave waveBottom" style="background-image: url('./img/wave-bot.png')"></div>
     </div>
 
-    
+    <script>
+        function initialize() {
+            var input = document.getElementById('searchTextField');
+            new google.maps.places.Autocomplete(input);
+            }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 
 </body>
 

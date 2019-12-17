@@ -2,19 +2,76 @@ body {
     /* background-image: url('../img/google-bg.jpg'); */
     /* margin: 0; */
     background-image: linear-gradient(to top, #86377b 20%, #27273c 80%);
-
 }
 
+/* .input-group {
+    width: 35%;
+    margin: 0 auto;
+    margin-top: 20%;
+    /* border-radius: 50%; */
+/* } */
+
+#populationImg {
+    display:flex;
+    justify-content: center;
+    height: 60px;
+    margin-top: 14%;
+    margin-bottom: 2%;
+    /* position: absolute; */
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-filter: invert(100%) drop-shadow(10px 10px 30px white); 
+    /* filter: drop-shadow(1px 0px 0px white); */
+}
 
 .searchBox {
-    /* position: absolute; */
-    /* margin: auto 0;
-    width:100%;
+    /* margin-top: 20%; */
+    /* width:100%;
     height:100%;
     align-items:center;
     display:flex;
     justify-content: center; */
 }
+
+input {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid #86377B;
+    width: 30%;
+    height: 38px;
+    direction:RTL;
+}
+
+input:focus {
+    outline: none;
+    border-radius: 20px;
+    border: 2px solid white;
+    box-shadow: 5 5 10 rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 30px 10px rgba(195,155,189,0.79);
+    -moz-box-shadow: 0px 0px 30px 10px rgba(195,155,189,0.79);
+    box-shadow: 0px 0px 30px 10px rgba(195,155,189,0.79);
+  }
+
+  .pac-container {
+      /* margin-top: 2px; */
+      border-radius: 10px;
+      background-color: transparent;
+  }
+
+  .pac-container:after {
+    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+    background-image: none !important;
+    height: 0px;
+
+}
+
+
+  .pac-icon {
+      float: right;
+  }
 
 
 
