@@ -15,7 +15,7 @@ body {
     display:flex;
     justify-content: center;
     height: 60px;
-    margin-top: 14%;
+    margin-top: 16%;
     margin-bottom: 2%;
     /* position: absolute; */
     margin-left: auto;
@@ -25,21 +25,22 @@ body {
 }
 
 .searchBox {
-    /* margin-top: 20%; */
-    /* width:100%;
-    height:100%;
-    align-items:center;
-    display:flex;
-    justify-content: center; */
-}
-
-input {
-    display: block;
+    /* padding: 10px; */
+    display: flex;
     margin: 0 auto;
-    padding: 10px;
+    width: 30%;
+    align-items: center;
     border-radius: 20px;
     border: 2px solid #86377B;
-    width: 30%;
+    background-color: white;
+}
+
+
+input {
+    padding: 10px;
+    background-color: transparent;
+    border: 0;
+    width: 100%;
     height: 38px;
     direction:RTL;
 }
@@ -54,26 +55,85 @@ input:focus {
     box-shadow: 0px 0px 30px 10px rgba(195,155,189,0.79);
   }
 
-  .pac-container {
-      /* margin-top: 2px; */
-      border-radius: 10px;
-      background-color: transparent;
-  }
-
-  .pac-container:after {
-    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
-
-    background-image: none !important;
-    height: 0px;
+#searchIcon {
+    color: #85367A;
+    margin: 10px;
 
 }
 
+/* Google Autocomplete  */
 
-  .pac-icon {
-      float: right;
-  }
+.pac-container {
+    margin-top: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 0px;
+    background-color: transparent;
+    color: white;
+}
+  
+
+.pac-container:after {
+/* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+background-image: none !important;
+height: 0px;
+}
+
+.pac-item {
+    border-top: 0px;
+}
+
+.pac-item:hover {
+    background: #27273c;
+}
+
+.pac-item-query{
+    color:white;
+}
+ .pac-item-selected {
+     background: #27273c;
+ }
+
+.pac-icon {
+    float: right;
+}
+
+/* Live data div */
+
+.live-data {
+    display: none;
+    align-items: center;
+    margin-top: 10%;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: space-between;
+    width: 70%;
+    border-radius: 20px;
+    border: 2px solid #86377B;
+    /* background-color: #F0E5EE; */
+    color: wheat;
+}
+
+#report {
+    font-size: 50px;
+    flex-grow: ;
+}
+
+#date {
+    font-size: 12px;
+    font-style: italic;
+    float: right;
+    align-self: flex-end;
+}
+
+#container {
+    height: 500px;
+    background-color: transparent;
+}
 
 
+/* Footer */
 
 @keyframes move_wave {
     0% {
