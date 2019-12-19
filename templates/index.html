@@ -25,7 +25,8 @@
 
     <img src="img/location1.png" id="populationImg">
 
-    {{>searchBox}}
+    <!-- {{>searchBox}} -->
+    {% include 'partials/searchBox.html' %}
 
     <div class="live-data">
         <p id="report"></p>
@@ -33,8 +34,8 @@
         <p id="date"></p>
     </div>
 
-    {{>wavesFooter}}    
-
+    <!-- {{>wavesFooter}}     -->
+    {% include 'partials/wavesFooter.html' %}
     <script src="js/autocomplete.js"></script>
     <script src="js/searchPlace.js"></script>
 
