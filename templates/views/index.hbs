@@ -4,19 +4,17 @@
     {{!-- Bootstrap --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/permanent.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/permanent.css">
+    <link rel="stylesheet" href="css/index.css">
 
     <script src="https://kit.fontawesome.com/fc984ea31b.js" crossorigin="anonymous"></script>
-
-
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.3/lottie.js"></script>
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkG702RFFEEm08CP87sLK_amm-ru_eUVs&libraries=places&language=he"></script>
-        <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.0.0/themes/dark_earth.min.js" type="text/javascript"></script>
 
 
@@ -26,74 +24,19 @@
     {{!-- <script src="js/delivery.js"></script> --}}
 
     <img src="img/location1.png" id="populationImg">
-    {{!-- <img src="img/search.svg" id="populationImg"> --}}
 
     {{>searchBox}}
+
     <div class="live-data">
         <p id="report"></p>
                 <canvas id="barChart"></canvas>
         <p id="date"></p>
-
     </div>
 
-    <div class="waveAnimation waveWrapper">
-        <div class="wave waveTop" style="background-image: url('./img/wave-top.png')"></div>
-        <div class="wave waveMiddle" style="background-image: url('./img/wave-mid.png')"></div>
-        <div class="wave waveBottom" style="background-image: url('./img/wave-bot.png')"></div>
-    </div>
+    {{>wavesFooter}}    
 
-    <script>
-        function initialize() {
-            var input = document.getElementById('searchTextField');
-            new google.maps.places.Autocomplete(input);
-        }
-
-        google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
+    <script src="js/autocomplete.js"></script>
     <script src="js/searchPlace.js"></script>
-
-    <script>
-        var ctxB = document.getElementById("barChart").getContext('2d');
-var myBarChart = new Chart(ctxB, {
-type: 'bar',
-data: {
-labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-datasets: [{
-label: '# of Votes',
-data: [12, 19, 3, 5, 2, 3],
-backgroundColor: [
-'rgba(255, 99, 132, 0.2)',
-'rgba(54, 162, 235, 0.2)',
-'rgba(255, 206, 86, 0.2)',
-'rgba(75, 192, 192, 0.2)',
-'rgba(153, 102, 255, 0.2)',
-'rgba(255, 159, 64, 0.2)'
-],
-borderColor: [
-'rgba(255,99,132,1)',
-'rgba(54, 162, 235, 1)',
-'rgba(255, 206, 86, 1)',
-'rgba(75, 192, 192, 1)',
-'rgba(153, 102, 255, 1)',
-'rgba(255, 159, 64, 1)'
-],
-borderWidth: 1
-}]
-},
-options: {
-scales: {
-yAxes: [{
-ticks: {
-beginAtZero: true
-}
-}]
-}
-}
-});
-    </script>
-
-
 
 </body>
 

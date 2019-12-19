@@ -1,51 +1,30 @@
 body {
-    /* background-image: url('../img/google-bg.jpg'); */
-    /* margin: 0; */
     background-image: linear-gradient(to top, #86377b 20%, #27273c 80%);
 }
 
-/* .input-group {
-    width: 35%;
-    margin: 0 auto;
-    margin-top: 20%;
-    /* border-radius: 50%; */
-/* } */
-
 #populationImg {
     display:flex;
-    justify-content: center;
-    height: 60px;
-    margin-top: 16%;
-    margin-bottom: 2%;
-    /* position: absolute; */
-    margin-left: auto;
-    margin-right: auto;
     -webkit-filter: invert(100%) drop-shadow(10px 10px 30px white); 
     /* filter: drop-shadow(1px 0px 0px white); */
 }
 
 .searchBox {
-    /* padding: 10px; */
     display: flex;
-    margin: 0 auto;
-    width: 30%;
-    align-items: center;
     border-radius: 20px;
     border: 2px solid #86377B;
     background-color: white;
 }
 
 
-input {
+.searchBox input {
     padding: 10px;
     background-color: transparent;
     border: 0;
     width: 100%;
-    height: 38px;
     direction:RTL;
 }
 
-input:focus {
+.searchBox input:focus {
     outline: none;
     border-radius: 20px;
     border: 2px solid white;
@@ -58,7 +37,6 @@ input:focus {
 #searchIcon {
     color: #85367A;
     margin: 10px;
-
 }
 
 /* Google Autocomplete  */
@@ -72,7 +50,6 @@ input:focus {
     color: white;
 }
   
-
 .pac-container:after {
 /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
 
@@ -83,55 +60,18 @@ height: 0px;
 .pac-item {
     border-top: 0px;
 }
-
 .pac-item:hover {
     background: #27273c;
 }
-
 .pac-item-query{
     color:white;
 }
- .pac-item-selected {
-     background: #27273c;
- }
-
+.pac-item-selected {
+    background: #27273c;
+}
 .pac-icon {
     float: right;
 }
-
-/* Live data div */
-
-.live-data {
-    display: none;
-    align-items: center;
-    margin-top: 10%;
-    margin-right: auto;
-    margin-left: auto;
-    justify-content: space-between;
-    width: 70%;
-    border-radius: 20px;
-    border: 2px solid #86377B;
-    /* background-color: #F0E5EE; */
-    color: wheat;
-}
-
-#report {
-    font-size: 50px;
-    flex-grow: ;
-}
-
-#date {
-    font-size: 12px;
-    font-style: italic;
-    float: right;
-    align-self: flex-end;
-}
-
-#container {
-    height: 500px;
-    background-color: transparent;
-}
-
 
 /* Footer */
 
