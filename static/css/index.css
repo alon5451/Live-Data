@@ -1,9 +1,16 @@
-#populationImg {
+#populationImg, #locationAnimation {
     height: 60px;
     margin-top: 16%;
     margin-bottom: 2%;
     margin-left: auto;
     margin-right: auto;
+}
+
+#locationAnimation {
+    display: none;
+    height: 90px;
+    /* margin: auto auto;
+    width: 200px; */
 }
 
 .searchBox {
@@ -13,6 +20,10 @@
 
 
 .searchBox input {
+    height: 38px;
+}
+
+.searchBox input:focus {
     height: 38px;
 }
  

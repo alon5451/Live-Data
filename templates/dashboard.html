@@ -1,0 +1,71 @@
+<html dir="rtl">
+
+<head>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+    <link rel="stylesheet" href="/static/css/permanent.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+
+    
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+
+
+    <script src="https://kit.fontawesome.com/fc984ea31b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.3/lottie.js"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkG702RFFEEm08CP87sLK_amm-ru_eUVs&libraries=places&language=he"></script>
+    
+
+
+<body>
+    
+    
+    <!-- <script src="js/delivery.js"></script> -->
+    <div id="topBar">
+
+        <a href="./" id="populationImgDiv">
+            <img src="/static/img/location1.png" id="populationImg">
+        </a>
+    
+        {% include '/partials/searchBox.html' %}
+    </div>
+    <div id="locationAnimation" class="leaflet-center"></div>
+    <!-- <div style="margin-bottom: -10%;width: 150px; height: 50px; margin: 0 auto;">
+        <div style="margin: 2px; height: 20px; width: 20px; background-color: green; border-radius: 50%; float: right; box-shadow: 0px 0px 0px green; opacity: 0.5;"></div>
+        <div style="margin: 2px; height: 20px; width: 20px; background-color: yellow; border-radius: 50%; float: right;box-shadow: 0px 0px 0px yellow;"></div style="height: 30px; width: 30px; background-color: green; border-radius: 50%;">
+        <div style="margin: 2px; height: 20px; width: 20px; background-color: red; border-radius: 50%; float: right;box-shadow: 0px 0px 20px red; opacity: 1;"></div style="height: 30px; width: 30px; background-color: green; border-radius: 50%;">
+
+    </div> -->
+
+    <div id="mapid">
+        <!-- <div class="leaflet-bottom leaflet-left">
+            <input type="button" id="Btn1" value="Btn1" onclick="" class="btnStyle span3" />
+            
+        </div> -->
+        
+    </div>
+    
+    <script>
+        console.log(localStorage.getItem("liveReport"))
+    </script>
+
+    <script src="/static/js/delivery.js"></script>
+    <script src="/static/js/leafletMap.js"></script>
+    <script src="/static/js/autocomplete.js"></script>
+    <script src="/static/js/searchPlace.js"></script>
+    <script>
+        animation();
+    </script>
+</body>
+
+
+</html>

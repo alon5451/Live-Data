@@ -1,12 +1,12 @@
 <html dir="rtl">
 
 <head>
-    {{!-- Bootstrap --}}
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/permanent.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="/static/css/permanent.css">
+    <link rel="stylesheet" href="/static/css/index.css">
 
     <script src="https://kit.fontawesome.com/fc984ea31b.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
@@ -21,23 +21,21 @@
 <body>
 
     <div id="locationAnimation"></div>
-    {{!-- <script src="js/delivery.js"></script> --}}
+    
 
-    <img src="img/location1.png" id="populationImg">
+    <img src="/static/img/location1.png" id="populationImg">
 
-    <!-- {{>searchBox}} -->
-    {% include 'partials/searchBox.html' %}
+    {% include '/partials/searchBox.html' %}
 
     <div class="live-data">
         <p id="report"></p>
-                <canvas id="barChart"></canvas>
         <p id="date"></p>
     </div>
 
-    <!-- {{>wavesFooter}}     -->
-    {% include 'partials/wavesFooter.html' %}
-    <script src="js/autocomplete.js"></script>
-    <script src="js/searchPlace.js"></script>
+    {% include '/partials/wavesFooter.html' %}
+    <script src="/static/js/delivery.js"></script>
+    <script src="/static/js/autocomplete.js"></script>
+    <script src="/static/js/searchPlace.js"></script>
 
 </body>
 

@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import datetime
 import time
+import json
 
 def type_prop(p):
     try:
@@ -44,7 +45,7 @@ def events_prop(p):
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36'}
         response = requests.get(url, headers=headers)
         content = response.content
-        soup = BeautifulSoup((content).decode('UTF-8'))
+        soup = BeautifulSoup((content).decode('UTF-8'), features="lxml")
         
         classi = 'EDblX'
         sub_classi = 'h998We'
@@ -62,7 +63,7 @@ def events_prop(p):
                 title = e.find('div', class_='title').text
             except: title = None
             close_events.append({'Day': day, 'Hour': hour, 'Title': title})
-            print('***', day, hour, title)
+#             print('***', day, hour, title)
     except Exception as e:
         None
 
@@ -148,7 +149,7 @@ class Place:
         
         week_dicti = {}
         for histo in soup.findAll('div', class_='ecodF'):
-            day = histo['aria-label']
+            day = histo['aria-label'].replace('היסטוגרמה המראה שעות פופולריות בימי ','').replace(':','')
             day_dicti = {}
             for hour_ele in histo.findAll('div', class_='lubh-bar'):
                 hour = hour_ele['aria-label'].split()[0]
@@ -163,6 +164,8 @@ class Place:
             self.knowledge_panel() 
         p = self.panel
         
+        place_google_name = p.find('div', class_='kno-ecr-pt').text
+        
         place_type = type_prop(p)
         
         try:
@@ -172,7 +175,6 @@ class Place:
             
         try:
             usual_time_spent = p.find('div', class_='UYKlhc').text
-            print(usual_time_spent)
         except:
             usual_time_spent = None
         
@@ -181,7 +183,8 @@ class Place:
         close_events = events_prop(p)
         
         live_population = self.live_pop()
-                
+        
+        self.google_name = place_google_name
         self.type = place_type
         self.description = place_descrip
         
@@ -192,9 +195,9 @@ class Place:
         self.live_population = live_population
         self.usual_time_spent = usual_time_spent
         
-        return {'type': place_type, 'descrip': place_descrip}, other_attrib, close_events
-    
-    def google_api(self, api_key):
+        return self.__dict__
+
+    def google_api(self, api_key = 'AIzaSyDkG702RFFEEm08CP87sLK_amm-ru_eUVs'):
         url = "https://maps.googleapis.com/maps/api/place/textsearch/json?"       
         query = self.name
 
@@ -209,6 +212,16 @@ class Place:
         self.google_api_info = x['results'] 
         
         return x['results']
+
+    def get_props(self):
+        dicti = {}
+        
+        for key in self.__dict__.keys():
+            if key not in ['content', 'soup', 'panel']:
+                dicti[key] = self.__dict__[key]
+        
+        return dicti
+
 
 
 if __name__ == '__main__':

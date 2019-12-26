@@ -36,7 +36,9 @@ body {
 
 #searchIcon {
     color: #85367A;
-    margin: 10px;
+    height: 18px;
+    margin: 9px;
+    margin-top: 12px;
 }
 
 /* Google Autocomplete  */
@@ -142,3 +144,8 @@ height: 0px;
 }
 
 /* Bootstrap NavBar */
+
+#locationAnimation {
+    margin: auto auto;
+    width: 200px;
+}
