@@ -45,12 +45,44 @@
         <div style="margin: 2px; height: 20px; width: 20px; background-color: red; border-radius: 50%; float: right;box-shadow: 0px 0px 20px red; opacity: 1;"></div style="height: 30px; width: 30px; background-color: green; border-radius: 50%;">
 
     </div> -->
-
-    <div id="mapid">
-        <!-- <div class="leaflet-bottom leaflet-left">
-            <input type="button" id="Btn1" value="Btn1" onclick="" class="btnStyle span3" />
+    <div id="content">
+        
+        <div id="mapid">
+            <!-- <div class="leaflet-bottom leaflet-left">
+                <input type="button" id="Btn1" value="Btn1" onclick="" class="btnStyle span3" />
+                
+            </div> -->
             
-        </div> -->
+            
+            <div id="button-wrapper">
+                <button type="button" class="btn-minimize"><i class="far fa-window-restore" style="color: white; font-size: 20px; padding: 5px;"></i></button>
+             </div> 
+            <div class="places leaflet-control">
+                
+                <div class="place">
+                    <a href="#">
+                        <div id="place-name">
+                            <p>דיזינגוף סנטר</p>
+                        </div>
+                        <div id="place-type">
+                            <p>(קניון בתל אביב יפו)</p>
+                        </div>
+                        <div id="place-address">
+                            <p>דיזינגוף 50, תל אביב יפו, ישראל</p>
+                        </div>
+                    </a>
+                    <!-- <img src="" alt="">  -->
+                    
+                </div>
+            </div>
+
+            <div class="place-props leaflet-control">
+            
+            </div>
+            
+        </div>
+
+        
         
     </div>
     
@@ -64,6 +96,14 @@
     <script src="/static/js/searchPlace.js"></script>
     <script>
         animation();
+    </script>
+    <script>
+        $(".btn-minimize").click(function(){
+            $(this).toggleClass('btn-plus');
+            $(".places").slideToggle();
+            $(".place-props").slideToggle();
+            // $(".btn-minimize").html('<i class="far fa-window-restore" style="color: white; font-size: 20px; padding: 5px;"></i>');
+        });
     </script>
 </body>
 

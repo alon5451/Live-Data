@@ -7,7 +7,7 @@ const loadIndexStyle = () => {
     document.getElementById("populationImg").style.display = 'none';
     document.getElementById("locationAnimation").style.display = 'block';
     document.getElementsByClassName("searchBox")[0].style.opacity = 0.3;
-    document.getElementsByClassName("searchBox")[0].disabled = true;
+    document.getElementById("searchTextField").disabled = true;
 
     document.getElementsByClassName("waveAnimation")[0].style.opacity = 0.3;
 

@@ -164,7 +164,11 @@ class Place:
             self.knowledge_panel() 
         p = self.panel
         
-        place_google_name = p.find('div', class_='kno-ecr-pt').text
+        try:
+            place_google_name = p.find('div', class_='kno-ecr-pt').text
+        except:
+            self.knowledge_panel() 
+            return self.set_props()
         
         place_type = type_prop(p)
         
