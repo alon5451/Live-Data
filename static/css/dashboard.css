@@ -154,6 +154,11 @@
     background-color: #85367A;
 }
 
+.fa-window-restore {
+    color: white; 
+    font-size: 20px; 
+    padding: 5px;
+}
 
 
  .leaflet-popup-content-wrapper, .leaflet-popup-tip {

@@ -20,11 +20,13 @@ def dashboard():
 @app.route('/place', methods=['GET'])
 def get_tasks():
     placeName = request.args['name']
-
+    print(1)
     place = Place(placeName)
-
+    print(2)
     place.set_props()
+    print(3)
     place.google_api()
+    print(4)
     # place.set_general_hours()
 #     alerts = list(get_alerts(fromDate, toDate).apply(lambda x: x.to_json(force_ascii=False), axis=1))
     

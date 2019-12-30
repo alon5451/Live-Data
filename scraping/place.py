@@ -106,7 +106,8 @@ class Place:
     
     def knowledge_panel(self, current=True):
         if current:
-            self.google_soup()       
+            self.google_soup() 
+            print(self.soup)      
         panel = self.soup.find('div', class_='knowledge-panel')
         
         self.panel = panel
@@ -164,11 +165,18 @@ class Place:
             self.knowledge_panel() 
         p = self.panel
         
+        print('x')
         try:
             place_google_name = p.find('div', class_='kno-ecr-pt').text
         except:
-            self.knowledge_panel() 
-            return self.set_props()
+            try:
+                place_google_name = p.find('div', class_='SPZz6b').text
+            except: 
+                print(self.knowledge_panel())
+                place_google_name = None
+                pass
+                # self.knowledge_panel() 
+                # return self.set_props()
         
         place_type = type_prop(p)
         
@@ -229,4 +237,4 @@ class Place:
 
 
 if __name__ == '__main__':
-    print(Place('רכבת השלום').live_pop()) 
+    print(Place('רכבת ההגנה, דרך ההגנה, תל אביב יפו, ישראל').set_props()) 
