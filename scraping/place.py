@@ -107,7 +107,7 @@ class Place:
     def knowledge_panel(self, current=True):
         if current:
             self.google_soup() 
-            print(self.soup)      
+            # print(self.soup)      
         panel = self.soup.find('div', class_='knowledge-panel')
         
         self.panel = panel
@@ -237,4 +237,4 @@ class Place:
 
 
 if __name__ == '__main__':
-    print(Place('רכבת ההגנה, דרך ההגנה, תל אביב יפו, ישראל').set_props()) 
+    print(Place('דיזינגוף סנטר').set_props()) 
