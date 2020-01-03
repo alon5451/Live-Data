@@ -39,7 +39,7 @@ def events_prop(p):
     close_events = []
     classi = 'AxJnmb'
     sub_classi = 'PZPZlf'
-    
+
     if p.find('a', class_='P7Vl4c') is not None:
         url = 'https://www.google.com{}'.format(p.find('a', class_='P7Vl4c')['href'])  
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36'}
@@ -164,7 +164,13 @@ class Place:
         if hasattr(self, 'panel') == False:
             self.knowledge_panel() 
         p = self.panel
-        
+        if p is None:
+            self.knowledge_panel()
+        p = self.panel
+        if p is None:
+            return {'error': 'couldn\'t set knowledge panel'}
+
+
         print('x')
         try:
             place_google_name = p.find('div', class_='kno-ecr-pt').text
@@ -237,4 +243,4 @@ class Place:
 
 
 if __name__ == '__main__':
-    print(Place('דיזינגוף סנטר').set_props()) 
+    print(Place('כללית מרפאת מגדל המאה, שלמה אבן גבירול, תל אביב יפו, ישראל').set_props()) 

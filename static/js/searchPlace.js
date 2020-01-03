@@ -17,7 +17,7 @@ const loadIndexStyle = () => {
 const loadDashboardStyle = () => {
     document.getElementById("locationAnimation").style.display = 'block';
     document.getElementById("topBar").style.opacity = 0.3;
-    document.getElementById("mapid").style.opacity = 0.3;
+    document.getElementById("mapid").style.opacity = 0.05;
     document.getElementById("searchTextField").disabled = true;
 
 }
