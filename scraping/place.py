@@ -168,6 +168,7 @@ class Place:
             self.knowledge_panel()
         p = self.panel
         if p is None:
+            print('FUCK')
             return {'error': 'couldn\'t set knowledge panel'}
 
 

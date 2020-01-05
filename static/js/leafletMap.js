@@ -8,8 +8,17 @@ let lat = ''
 let lng = ''
 
 const setLastPlace = (place) => {
-    placeName = place['google_name']
-    report = place['live_population']['live_report']
+    if ('google_name' in place) {
+        placeName = place['google_name']
+    } else {
+        placeName = place['name'].split(',')[0]
+    }
+    if (('live_population' in place) && place['live_population']['live_report'] != null) {
+        report = place['live_population']['live_report']
+    } else {
+        report = 'אין שידור חי'
+    }
+    
     lat = place['location']['lat']
     lng = place['location']['lng']
 }

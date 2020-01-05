@@ -72,3 +72,8 @@ const getLive = (placeName, callback) => {
 
 
 }
+
+
+var theDiv = document.getElementsByClassName("places");
+var content = document.createTextNode("<YOUR_CONTENT>");
+theDiv.appendChild(content);

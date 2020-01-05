@@ -20,11 +20,17 @@
     <script src="https://kit.fontawesome.com/fc984ea31b.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.3/lottie.js"></script>
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkG702RFFEEm08CP87sLK_amm-ru_eUVs&libraries=places&language=he"></script>
     <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
 
+
+    <script>
+       
+    </script>
 
 <body>
     
@@ -65,7 +71,6 @@
              <div class="places leaflet-control">
                 
                 <div class="place">
-                    <a href="#">
                         <div>
                             <img src="https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png" id="google-icon">
                         </div>
@@ -81,15 +86,37 @@
                         <!-- <div id="place-address">
                             <p>דיזינגוף 50, תל אביב יפו, ישראל</p>
                         </div> -->
-                    </a>
                      <!-- <img src="" alt="">   -->
                     
                 </div>
+                <div class="place">
+                    <div>
+                        <img src="https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png" id="google-icon">
+                    </div>
+                    <div id="place-name">
+                        <p>דיזינגוף סנטר</p>
+                    </div>
+                    
+                    <div id="place-type">
+                        <p>קניון בתל אביב יפו</p>
+                    </div>
+
+                    <div id="place-change">
+                        <p>43.87%  <i class="fas fa-arrow-up" style="color: red; animation: example 3s infinite;"></i></p>
+                    </div>
+
+                    
+                    <!-- <div id="place-address">
+                        <p>דיזינגוף 50, תל אביב יפו, ישראל</p>
+                    </div> -->
+                 <!-- <img src="" alt="">   -->
+                
+            </div>
             </div>
 
-            <div class="place-props leaflet-control">
+            <!-- <div class="place-props leaflet-control">
                 <div id="container" style="height: 100px; width: 200px;"></div>
-            </div>
+            </div> -->
              
         </div>
 
@@ -127,6 +154,15 @@ chart.container('container');
 chart.draw();
 });
 $('.anychart-credits-text').hide();
+
+
+
+$('.place').click(function() {
+    
+    $(this).toggleClass('margin-place', 500); 
+    $(this).toggleClass('place-props', 500); 
+    // $(this).removeClass('place')
+});
     </script>
 </body>
 

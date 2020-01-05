@@ -112,6 +112,7 @@ p {
     font-size: 15px;
     text-align: center;
     /* background-image: linear-gradient(to right, #86377b 20%, #27273c 80%); */
+    margin-top: 20px;
 }
 
 #google-icon {
@@ -134,18 +135,36 @@ p {
     /* margin-top: 1px; */
 }
 
+@keyframes example {
+    from {opacity: 1;}
+    to {opacity: 0;}
+  }
+
+#place-change {
+    color: white;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+
+.margin-place {
+    margin-right: 70%;
+}
+
 .place-props {
     position: absolute;
+    height: 150px;
+    width: 200px;
     height: 90%;
-    width: 17%;
+    /* width: 17%; */
     /* background-color: white; */
     /* background-image: linear-gradient(to top, #EF5E18 20%, #E93600 50%); */
-    background-color: #2C5A79;
+    background-color: #27273C;
     border-radius: 20px;
     box-shadow: 0px 0px 5px 5px #888888;
     /* border: 2px solid white; */
-    margin: 2%;
-    margin-right: 17%;
+    /* margin: 2%; */
+    margin-right: 70%;
     /* margin-left: 2%; */
 }
 
