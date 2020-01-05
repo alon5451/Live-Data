@@ -137,7 +137,7 @@ p {
 
 @keyframes example {
     from {opacity: 1;}
-    to {opacity: 0;}
+    to {opacity: 0.2;}
   }
 
 #place-change {
