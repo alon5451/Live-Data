@@ -23,19 +23,22 @@ const loadDashboardStyle = () => {
 }
 
 var input = document.getElementById("searchTextField");
-        input.addEventListener("keyup", (event) => {
-            const placeName = document.getElementById("searchTextField").value;
-            if (event.keyCode === 13) {
-                if (window.location.href=='http://localhost:9090/') {
-                    loadIndexStyle()
-                } else if (window.location.href=='http://localhost:9090/dashboard') {
-                    loadDashboardStyle()
-                }          
+input.addEventListener("keyup", (event) => {
+    const placeName = document.getElementById("searchTextField").value;
+    if (event.keyCode === 13) {
+        if (window.location.href=='http://localhost:9090/') {
+            loadIndexStyle()
+        } else if (window.location.href=='http://localhost:9090/dashboard') {
+            loadDashboardStyle()
+        }          
 
-                getLive(placeName)
-                event.preventDefault();
-            }
+        getLive(placeName, () => {
+            $(".places").html(createPlaceCube() + $(".places").html())
         })
+
+        event.preventDefault();
+    }
+})
 
 const getLive = (placeName, callback) => {
     const fetchingUrl = `http://localhost:9090/place?name=${placeName}`
@@ -58,15 +61,20 @@ const getLive = (placeName, callback) => {
             const place = JSON.parse(localStorage.getItem("place"))
 
             setLastPlace(place)
-            addMarker()
+            addMarker(() => {
+                $(".places").html(createPlaceCube() + $(".places").html())
+                clickPlaceDiv()
+            })
+            
 
             document.getElementById("locationAnimation").style.display = 'none';
             document.getElementById("topBar").style.opacity = 1;
             document.getElementById("mapid").style.opacity = 1;
             document.getElementById("searchTextField").disabled = false;
             document.getElementById("searchTextField").value = '';
+            // callback()
         }          
-
+        
         
     })
 
@@ -74,6 +82,3 @@ const getLive = (placeName, callback) => {
 }
 
 
-var theDiv = document.getElementsByClassName("places");
-var content = document.createTextNode("<YOUR_CONTENT>");
-theDiv.appendChild(content);

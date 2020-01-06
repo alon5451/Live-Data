@@ -45,13 +45,21 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'your.mapbox.access.token'
 }).addTo(mymap);
 
-const addMarker = () => {
+const addMarker = (callback) => {
     mymap.setView([lat, lng], 16)
     var marker = L.marker([lat, lng], {icon: manIcon}).addTo(mymap);
     marker.bindPopup(`<b>${placeName}</b><br><i class="fas fa-users" style="padding: 6px; padding-right:0;"></i>${report}`).openPopup(); 
+    callback()
+    // $(".places").html($(".places").html() + createPlaceCube())
 }
 
-addMarker()
+addMarker(() => {
+    $(".places").html(createPlaceCube() + $(".places").html())
+    clickPlaceDiv()
+})
+
+
+
 
 
 
