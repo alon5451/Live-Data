@@ -84,9 +84,10 @@ p {
 
 .places {
     /* position: absolute; */
-    height: 95%;
-    width: 40%;
-    
+    height: 100%;
+    width: auto;
+    direction: ltr;
+    overflow-y: auto;
     /* background-image: linear-gradient(to top, #E6E4E0 20%, #D5D2CF 80%); */
     /* background-image: linear-gradient(to top, #86377b 20%, #27273c 80%); */
     
@@ -96,7 +97,7 @@ p {
     /* border: 2px solid #86377B; */
     /* border-left: 0; */
     float: right;
-    margin: 1%;
+    /* margin-top: 1%; */
     padding: 15px;
 }
 
@@ -114,12 +115,14 @@ p {
     text-align: center;
     /* background-image: linear-gradient(to right, #86377b 20%, #27273c 80%); */
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .placi {
     /* position: inherit; */
     height: 500px;
-    width: 200px;
+    width: 300px;
     background-color: #27273C;
     /* background-image: linear-gradient(to right, #EF5E18 20%, #E93600 50%); */
     border-radius: 20px;
@@ -128,7 +131,11 @@ p {
     font-size: 15px;
     text-align: center;
     /* background-image: linear-gradient(to right, #86377b 20%, #27273c 80%); */
-    margin-left: 240px;
+    /* margin-left: 240px; */
+}
+
+.places :first-child {
+    margin-top: 0;
 }
 
 .place:hover {
@@ -251,6 +258,31 @@ p {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 20px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
 
 

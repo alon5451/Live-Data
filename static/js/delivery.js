@@ -5,7 +5,7 @@ const animation = () => {bodymovin.loadAnimation({
     renderer: 'svg',
     loop: true,
     autoplay: true,
-    path: '/static/js/search.json'
+    path: '/static/img/lottieAnimations/search.json'
         
     // Make sure your path has the same filename as your animated     SVG's JSON file //
     })

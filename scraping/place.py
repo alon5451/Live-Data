@@ -187,6 +187,8 @@ class Place:
         
         place_type = type_prop(p)
         
+        place_google_images = [img.find('img')['src'] for img in p.findAll('g-img')]
+
         try:
             place_descrip = p.find('div', class_='hb8SAc').text
         except:
@@ -213,6 +215,8 @@ class Place:
         self.events = close_events
         self.live_population = live_population
         self.usual_time_spent = usual_time_spent
+
+        self.google_images = place_google_images
         
         return self.__dict__
 

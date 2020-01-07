@@ -18,12 +18,12 @@ const createPlaceCube = (place=JSON.parse(localStorage.getItem("place"))) => {
                             </div>`
 
     if (place['live_population']['live_height']!=null){
-        console.log(place['live_population'])
+        console.log(place['live_population'], place[''])
         if (liveHeight > usualHeight) {
             changePrecent = (((liveHeight-usualHeight)/usualHeight)*100).toString().slice(0, 5)
             arrow = '<i class="fas fa-arrow-up" style="color: red; animation: example 1s infinite alternate; font-size:25px;"></i>'
         } else {
-            changePrecent = (usualHeight-liveHeight)/usualHeight
+            changePrecent = (((usualHeight-liveHeight)/usualHeight)*100).toString().slice(0, 5)
             arrow = '<i class="fas fa-arrow-down" style="color: green; animation: example 1s infinite alternate; font-size:25px;"></i>'
         }
         placeChangeDiv = `<div id="place-change">\
@@ -38,7 +38,6 @@ const createPlaceCube = (place=JSON.parse(localStorage.getItem("place"))) => {
                         ${placeNameDiv}\
                         ${placeTypeDiv}\
                         ${placeChangeDiv}\
-                        <canvas id="myChart" width="100" height="100"></canvas>\
                     </div>`
     
     return mainDiv
@@ -46,28 +45,35 @@ const createPlaceCube = (place=JSON.parse(localStorage.getItem("place"))) => {
 
 const clickPlaceDiv = () => {
     $('.place').click(function() {
-    // var places = $('.place');
-    // $(this).insertAfter(tests.last());
-    
-    var places = $('.places')
-    
-    // console.log($(this).is(':first-child'))
-    if ($(this).is(':first-child')) {
-        places.prepend($(this)).fadeIn();
-    } else {
-        places.prepend($(this)).fadeIn();
-        $(this).hide();
-        $(this).slideToggle();
-    }
-    
-    // places.slideToggle();
-    // $(this).toggleClass('margin-place', 500); 
-    // $(this).toggleClass('place-props', 500); 
+        const places = $('.places')
+        const placesFirstChild = places.children().first()
+        
 
-    $(this).toggleClass('placi', 500); 
-    // $(this).removeClass('place')
-})}
+        if ($(this).is(':first-child')) {
+            $(this).prependTo(places).fadeIn()
+            // places.prepend($(this)).fadeIn();
+        } else {
+            placesFirstChild.removeClass('placi', 500)
+                // places.prepend($(this), 500);
+                // $(this).hide();
+                $(this).hide().prependTo(places).fadeIn()
+                // $(this).slideToggle();
+
+            
+
+            
+            
+        }
 
 
+        $(this).toggleClass('placi', 500); 
 
+        places.scrollTop(0);
+    })
+}
+
+// <img src="${place['google_images'][0]}" id="populationImg">\
+
+
+// <canvas id="myChart" width="100" height="100"></canvas>
 // $(".places").html($(".places").html() + kaki)

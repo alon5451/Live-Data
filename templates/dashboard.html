@@ -1,7 +1,6 @@
 <html dir="rtl">
 
 <head>
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,7 +23,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.3/lottie.js"></script>
     <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkG702RFFEEm08CP87sLK_amm-ru_eUVs&libraries=places&language=he"></script>
+        src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places&language=he"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 
@@ -35,7 +34,6 @@
 <body>
     
     
-    <!-- <script src="js/delivery.js"></script> -->
     <div id="topBar">
 
         <a href="./" id="populationImgDiv">
@@ -44,15 +42,8 @@
     
         {% include '/partials/searchBox.html' %}
     </div>
-    
-    <!-- <div style="margin-bottom: -10%;width: 150px; height: 50px; margin: 0 auto;">
-        <div style="margin: 2px; height: 20px; width: 20px; background-color: green; border-radius: 50%; float: right; box-shadow: 0px 0px 0px green; opacity: 0.5;"></div>
-        <div style="margin: 2px; height: 20px; width: 20px; background-color: yellow; border-radius: 50%; float: right;box-shadow: 0px 0px 0px yellow;"></div style="height: 30px; width: 30px; background-color: green; border-radius: 50%;">
-        <div style="margin: 2px; height: 20px; width: 20px; background-color: red; border-radius: 50%; float: right;box-shadow: 0px 0px 20px red; opacity: 1;"></div style="height: 30px; width: 30px; background-color: green; border-radius: 50%;">
 
-    </div> -->
-
-    <div id="locationAnimation" class="leaflet-center"></div>
+    <div id="locationAnimation"></div>
     <div id="content">
         
         <div id="mapid">
@@ -104,7 +95,44 @@
                     </div>
 
                 
+                </div>
+                <div class="place">
+                    <div>
+                        <img src="https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png" id="google-icon">
+                    </div>
+                    <div id="place-name">
+                        <p>רכבת השלום</p>
+                    </div>
+                    
+                    <div id="place-type">
+                        <p>קניון בתל אביב יפו</p>
+                    </div>
+
+                    <div id="place-change">
+                        <p>43.87%  <i class="fas fa-arrow-up" style="color: red; animation: example 1s infinite alternate;"></i></p>
+                    </div>
+
+                
+                </div>
+                <div class="place">
+                    <div>
+                        <img src="https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png" id="google-icon">
+                    </div>
+                    <div id="place-name">
+                        <p>רכבת השלום</p>
+                    </div>
+                    
+                    <div id="place-type">
+                        <p>קניון בתל אביב יפו</p>
+                    </div>
+
+                    <div id="place-change">
+                        <p>43.87%  <i class="fas fa-arrow-up" style="color: red; animation: example 1s infinite alternate;"></i></p>
+                    </div>
+
+                
                 </div> -->
+
             </div>
 
             <!-- <div class="place-props leaflet-control">
@@ -117,6 +145,7 @@
         
     </div>
 
+    <script src="/static/js/placeClass.js"></script>
     <script src="/static/js/placeCube.js"></script>
     <script src="/static/js/delivery.js"></script>
     <script src="/static/js/leafletMap.js"></script>
