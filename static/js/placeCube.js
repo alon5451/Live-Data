@@ -10,20 +10,23 @@ const createPlaceCube = (place=JSON.parse(localStorage.getItem("place"))) => {
                              <p>${place['type']}</p>\
                           </div>`
     
-    const liveHeight = place['live_population']['live_height']
-    const usualHeight = place['live_population']['usual_height']
+    const liveHeight = parseFloat(place['live_population']['live_height'])
+    const usualHeight = parseFloat(place['live_population']['usual_height'])
 
     let placeChangeDiv = `<div id="place-change">\
                                 <p>אין שידור חי</p>\
                             </div>`
 
     if (place['live_population']['live_height']!=null){
-        console.log(place['live_population'], place[''])
+        console.log(place['live_population'])
+
         if (liveHeight > usualHeight) {
-            changePrecent = (((liveHeight-usualHeight)/usualHeight)*100).toString().slice(0, 5)
+            changePrecent = (((liveHeight-usualHeight)/usualHeight)*100)
+            changePrecent = Math.round(changePrecent*100) / 100
             arrow = '<i class="fas fa-arrow-up" style="color: red; animation: example 1s infinite alternate; font-size:25px;"></i>'
         } else {
-            changePrecent = (((usualHeight-liveHeight)/usualHeight)*100).toString().slice(0, 5)
+            changePrecent = (((liveHeight-usualHeight)/usualHeight)*100)
+            changePrecent = Math.round(changePrecent*100) / 100
             arrow = '<i class="fas fa-arrow-down" style="color: green; animation: example 1s infinite alternate; font-size:25px;"></i>'
         }
         placeChangeDiv = `<div id="place-change">\
