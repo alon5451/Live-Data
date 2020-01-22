@@ -11,7 +11,6 @@ google_api_key = 'AIzaSyDkG702RFFEEm08CP87sLK_amm-ru_eUVs'
 
 @app.route('/', methods=['GET'])
 def home():
-    
     return render_template('/index.html', google_api_key = google_api_key)
 
 @app.route('/dashboard', methods=['GET'])
@@ -22,13 +21,9 @@ def dashboard():
 @app.route('/place', methods=['GET'])
 def get_tasks():
     placeName = request.args['name']
-    print(1)
     place = Place(placeName)
-    print(2)
     place.set_props()
-    print(3)
     place.google_api()
-    print(4)
     # place.set_general_hours()
 #     alerts = list(get_alerts(fromDate, toDate).apply(lambda x: x.to_json(force_ascii=False), axis=1))
     

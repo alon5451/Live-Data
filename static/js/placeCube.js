@@ -1,5 +1,5 @@
 const createPlaceCube = (place=JSON.parse(localStorage.getItem("place"))) => {
-    const imgDiv = `<div>\
+    const imgDiv = `<div id='google-icon-div'>\
                         <img src="${place['google_api_info'][0]['icon']}" id="google-icon">\
                     </div>`
     const placeNameDiv = `<div id="place-name">\
@@ -46,6 +46,21 @@ const createPlaceCube = (place=JSON.parse(localStorage.getItem("place"))) => {
     return mainDiv
 }
 
+const addContent = (placeElement, place=JSON.parse(localStorage.getItem("place"))) => {
+    // $(placeElement).find('#google-icon-div').add($(placeElement).find('#place-change').html())
+    $(placeElement).find('#google-icon-div').html($(placeElement).find('#google-icon-div').html() + $(placeElement).find('#place-change').html())
+
+    $(placeElement).find('#place-name').css({'float':'right', 'padding':'15px'})
+    $(placeElement).find('#place-type').css({'float':'right'})
+
+    $(placeElement).find('#google-icon').css({'margin-bottom':'5px'})
+    $(placeElement).find('#place-change').css({'display':'none'})
+
+    const googleStreetView = `<img src="${place['google_images'][0]}" id="google-street-view">`
+    
+    $(placeElement).html($(placeElement).html() + googleStreetView)
+}
+
 const clickPlaceDiv = () => {
     $('.place').click(function() {
         const places = $('.places')
@@ -62,16 +77,15 @@ const clickPlaceDiv = () => {
                 $(this).hide().prependTo(places).fadeIn()
                 // $(this).slideToggle();
 
-            
-
-            
-            
         }
 
 
         $(this).toggleClass('placi', 500); 
 
         places.scrollTop(0);
+
+        addContent(this)
+        
     })
 }
 
