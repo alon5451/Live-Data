@@ -1,8 +1,10 @@
 class Place {
-    constructor(placeJson) {    
-        this.name = placeJson['google_name'];
-        this.type = placeJson['type']
-        this.livePopulation = placeJson['live_population']
+    constructor(placeName, data) {    
+        this.name = placeName;
+        this.data = data;
+        this.type = this.data['type']
+        this.livePopulation = this.data['live_population']
+        this.timeSet = this.livePopulation['time']
     }
 
     get change() {

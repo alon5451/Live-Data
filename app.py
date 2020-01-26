@@ -15,8 +15,12 @@ def home():
 
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
-    
-    return render_template('/dashboard.html', google_api_key=google_api_key)
+    try:
+        placeName = request.args['search']
+    except:
+        placeName = 'null'
+
+    return render_template('/dashboard.html', placeName=placeName, google_api_key=google_api_key)
 
 @app.route('/place', methods=['GET'])
 def get_tasks():

@@ -2,16 +2,19 @@ var input = document.getElementById("searchTextField");
 input.addEventListener("keyup", (event) => {
     const placeName = document.getElementById("searchTextField").value;
     if (event.keyCode === 13) {
+        if (localStorage.getItem('placesObj')==null) {
+            localStorage.setItem("placesObj", JSON.stringify([]));
+        }
         if (window.location.href=='http://localhost:9090/') {
             loadIndexStyle()
-        } else if (window.location.href=='http://localhost:9090/dashboard') {
+        } else if (window.location.href.replace(window.location.search,"")=='http://localhost:9090/dashboard') {
             loadDashboardStyle()
         }          
-
+        
         getLive(placeName, () => {
             $(".places").html(createPlaceCube() + $(".places").html())
         })
-
+        
         event.preventDefault();
     }
 })
@@ -21,18 +24,24 @@ const getLive = (placeName, callback) => {
 
     $.get(fetchingUrl, (res, err) => {        
 
-        localStorage.setItem("place", JSON.stringify(res));
+        
+        
+        // localStorage.setItem("place", JSON.stringify(res));
         // console.log(new Place(res))
         if (window.location.href=='http://localhost:9090/') {
-            window.location.href = `./dashboard`;
-        } else if (window.location.href=='http://localhost:9090/dashboard') {
-            const place = JSON.parse(localStorage.getItem("place"))
+            insertPlaceObjToLS(new Place(placeName, data=res))
+            
+            window.location.href = `./dashboard?search=${res['name']}`;
+        } else if (window.location.href.replace(window.location.search,"")=='http://localhost:9090/dashboard') {
 
-            setLastPlace(place)
-            addMarker(() => {
-                $(".places").html(createPlaceCube() + $(".places").html())
-                clickPlaceDiv()
+            insertPlaceObjToLS(new Place(placeName, data=res))
+            
+            // const place = JSON.parse(localStorage.getItem("place"))
+            addMarker(placeName, () => {
+                $(".places").html(createPlaceCube(placeName) + $(".places").html())
+                // clickPlaceDiv()
             })
+            
             
 
             document.getElementById("locationAnimation").style.display = 'none';

@@ -117,12 +117,14 @@ p {
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
+    padding: 3px;
 }
 
 .placi {
     /* position: inherit; */
-    height: 500px;
-    width: 500px;
+    height: auto;
+    overflow-y: auto;
+    width: 550px;
     background-color: #27273C;
     /* background-image: linear-gradient(to right, #EF5E18 20%, #E93600 50%); */
     border-radius: 20px;
@@ -130,24 +132,52 @@ p {
     /* border-bottom: 1px solid #fff; */
     font-size: 15px;
     text-align: center;
+    padding: 5px;
+    padding-bottom: 20px;
     /* background-image: linear-gradient(to right, #86377b 20%, #27273c 80%); */
     /* margin-left: 240px; */
+}
+
+.placi:hover {
+    /* cursor: pointer; */
 }
 
 .places :first-child {
     margin-top: 0;
 }
 
-.place:hover {
+.placeHover:hover {
     box-shadow: 0px 0px 4px 1px #888888;
     /* width: 200px;
     padding: 20px; */
     cursor: pointer;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.3s ease;
     
 }
 
-.place:hover #place-change {
-    font-size: 25px;
+.placeHover:hover #place-change {
+    /* font-size: 25px; */
+}
+
+.propertiess {
+    width: 300px; 
+    height: auto; 
+    float: right; 
+    margin-right: 20px; 
+    color: white; 
+    text-align: right;
+    border-left: white;
+}
+
+.addedText {
+    display: none;
+    direction: rtl;
+    font-size: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #86377B;
 }
 
 #google-icon-div {
@@ -159,6 +189,35 @@ p {
     height: 35px;
     margin: 10px;
 }
+
+.controlPlaceDiv {
+    display: none;
+    width: auto;
+    height:50px;
+    position: absolute;
+    top: 20px;
+    margin: 15px;
+    margin-top: 5;
+}
+
+.closePlace {
+    margin-top:1.5px;
+}
+
+.minimizePlace {
+    position:absolute; 
+    font-size:12px;
+    margin-left: 14px;
+}
+
+.minimizePlace:hover {
+    cursor: pointer;
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+    /* transition: 0.3s ease; */
+}
+
 
 #place-name {
     color: white;
@@ -172,6 +231,7 @@ p {
     color: white;
     font-size: 13px;
     font-style: italic;
+    
     /* margin-top: 1px; */
 }
 
@@ -188,17 +248,76 @@ p {
 }
 
 #google-street-view {
-    float: left;
-    width: 200px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px 2px white;
+    /* float: left; */
+    width: 250px;
+    border-radius: 2px;
+    /* box-shadow: 0px 0px 1px 1px #86377B; */
     margin: 10px;
+    padding-top: 60px;
 }
 
 
 .margin-place {
     margin-right: 70%;
 }
+
+.addedPropsDiv {
+    height: auto; 
+    display: flex;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.propSpan {
+    font-weight: bold; 
+    margin-left: 7px;
+    width: auto;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.propData {
+    overflow-y: auto;
+    width: 100%;
+    height: auto;
+    max-height: 80px;
+    padding: 3px;
+    padding-top: 0;
+    /* border-left: 1px solid #86377B; */
+}
+
+#copyMessage {
+    /* display: none; */
+    float: left;
+    color: #562F5B;
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 3px;
+    padding-right: 6px;
+    /* background-color: wheat; */
+}
+
+.propData:hover {
+    /* font-size: 14px;
+    box-shadow: 0px 0px 5px 1px #888888; */
+}
+#copyMessage:hover {
+    /* display: block; */
+    color: whitesmoke;
+    cursor: pointer;
+    /* box-shadow: 0px 0px 5px 1px #888888; */
+}
+.propData:hover + #copyMessage {
+    /* display: block; */
+    color: whitesmoke;
+    cursor: pointer;
+    /* box-shadow: 0px 0px 5px 1px #888888; */
+}
+
+/* .propData:last-child {
+    max-width: 190px;
+
+} */
 
 .place-props {
     /* position: absolute; */
@@ -229,6 +348,21 @@ p {
     top: 8px;
     margin-right: 46.3%;
     text-align: center;
+}
+
+.placeButtons {
+    display: none;
+    margin-left: 20px;
+    color: whitesmoke;
+}
+
+.chartDiv {
+    display: none;
+    margin-left: 20px;
+    margin-right: 10px; 
+    height: auto; 
+    margin-top: 1%;
+    float: left;
 }
 
 .btn-minimize {
@@ -284,10 +418,21 @@ p {
 ::-webkit-scrollbar {
     width: 10px;
   }
+
+.propData::-webkit-scrollbar {
+width: 6px;
+}
   
   /* Track */
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
+    border-radius: 20px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+
+  .propData::-webkit-scrollbar-track {
+    background: none;
     border-radius: 20px;
     margin-top: 2%;
     margin-bottom: 2%;

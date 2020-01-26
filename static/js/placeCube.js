@@ -1,14 +1,27 @@
-const createPlaceCube = (place=JSON.parse(localStorage.getItem("place"))) => {
+const createPlaceCube = (placeName) => {
+    // place=JSON.parse(localStorage.getItem("place"))
+
+    console.log(placeName)
+
+    const place = getPlaceObjFromLS(placeName).data
+
     const imgDiv = `<div id='google-icon-div'>\
                         <img src="${place['google_api_info'][0]['icon']}" id="google-icon">\
+                        <div class="controlPlaceDiv">\
+                            <i class="fas fa-times closePlace"></i>\
+                            <i class="fas fa-window-minimize minimizePlace" onclick="minimizePlace(this)"></i>\
+                        </div>\
                     </div>`
     const placeNameDiv = `<div id="place-name">\
                             <p>${place['google_name']}</p>\
                         </div>`
 
-    const placeTypeDiv = `<div id="place-type">\
-                             <p>${place['type']}</p>\
-                          </div>`
+    let placeTypeDiv = ``
+    if (place['type']) {
+        placeTypeDiv = `<div id="place-type">\
+                                <p>${place['type']}</p>\
+                            </div>`
+    } 
     
     const liveHeight = parseFloat(place['live_population']['live_height'])
     const usualHeight = parseFloat(place['live_population']['usual_height'])
@@ -34,63 +47,167 @@ const createPlaceCube = (place=JSON.parse(localStorage.getItem("place"))) => {
                                 </div>`
     } 
 
+    let addedProps = {}
+    for (prop in place) {
+        if (place[prop] == null) {continue;}
+        if (prop=='address') {
+            addedProps['כתובת'] = place['address']
+        } if (prop=='description') {
+            addedProps['תיאור'] = place['description'].replace('תיאור','').replace('ויקיפדיה','')
+        } if (prop=='usual_time_spent') {
+            addedProps['זמן בילוי ממוצע'] = place['usual_time_spent'].replace('אנשים בדרך כלל מבלים כאן ','').replace('במשך ','')
+        } if (prop=='other') {
+            for (o in place['other']) {
+                addedProps[o] = place['other'][o]
+            }
+        }
+    }
+
+    let addedPropsSpans = ``
+    for (prop in addedProps) {
+        addedPropsSpans += `<div class="addedPropsDiv">\
+                                <span class="propSpan">\
+                                    <p>${prop}:</p>\
+                                </span>\
+                                <span class="propData">\
+                                    <p>${addedProps[prop]}</p>\
+                                </span>\
+                                <span id="copyMessage" onclick="copyMessage(this)"><i class="far fa-copy"></i></span>\
+                            </div>`
+    }
     
-    
-    const mainDiv = `<div class="place">\
+    // location icon clickkkkkk
+    const mainDiv = `<div class="place placeHover" onclick="clickPlaceDiv(this)" aria-label='${placeName}'>\
                         ${imgDiv}\
+                        <div class='properties'>\
                         ${placeNameDiv}\
                         ${placeTypeDiv}\
                         ${placeChangeDiv}\
+                        <div class="addedText" style="direction: rtl ;">\
+                        ${addedPropsSpans}\
+                        </div>\
+                        </div>\
+                        <div class="placeButtons">
+                        <a href="#"> <i class="fas fa-calendar-day"></i></a>\
+                        <a href="#"> <i class="fab fa-google"></i></a>\
+                        <a href="#"> <i class="fas fa-images"></i></a>\
+                        <a href="#"> <i class="fas fa-cloud-sun"></i></a>\
+                        </div>\
+                        <div class="chartDiv">\
+                            <p style="color: white; font-size:13px;">\
+                            כרגע <b>${place['live_population']['live_report']}</b></p>\
+                            <p style="color: white; font-size:12px; font-style:italic; color: indianred">\
+                            (${place['live_population']['time']})</p>\
+                            <canvas id="myChart" width='180' height="150"></canvas>\
+                        </div>\
                     </div>`
     
     return mainDiv
 }
 
-const addContent = (placeElement, place=JSON.parse(localStorage.getItem("place"))) => {
-    // $(placeElement).find('#google-icon-div').add($(placeElement).find('#place-change').html())
-    $(placeElement).find('#google-icon-div').html($(placeElement).find('#google-icon-div').html() + $(placeElement).find('#place-change').html())
+const addContent = (placeElement, callback) => {
+    $(placeElement).find('.controlPlaceDiv').css({'display':'block'})
+    $(placeElement).find('#place-name').css({'margin-top':'15px'})
+    $(placeElement).find('#place-type').css({'padding-bottom': '10px'})
 
-    $(placeElement).find('#place-name').css({'float':'right', 'padding':'15px'})
-    $(placeElement).find('#place-type').css({'float':'right'})
-
-    $(placeElement).find('#google-icon').css({'margin-bottom':'5px'})
-    $(placeElement).find('#place-change').css({'display':'none'})
-
-    const googleStreetView = `<img src="${place['google_images'][0]}" id="google-street-view">`
+    const titleHeight = $(placeElement).find('#place-type').outerHeight() + $(placeElement).find('#place-name').outerHeight()
+    $(placeElement).find('.chartDiv').css({'display':'block'})
     
-    $(placeElement).html($(placeElement).html() + googleStreetView)
+    const chartWidth = $(placeElement).find('.chartDiv').width()
+    $(placeElement).find('.placeButtons').css({'display':'block', 'height':`${titleHeight-20}px`, 'width':`${chartWidth}px`,})
+    // $(placeElement).find('.chartDiv').hide().delay(500).fadeIn()
+    $(placeElement).find('.addedText').css({'display':'block'})
+    let addedHeight = $(placeElement).find('.addedText').height()
+
+    if (addedHeight<170) {
+        addedHeight = 170
+    }
+
+    $(placeElement).find('.chartDiv').children('p').eq(1).css({'padding-bottom': `${addedHeight-150}px`})
+    $(placeElement).find('.properties').toggleClass('propertiess');
+
+    $(placeElement).find('#place-change').css({'margin-top':'0'})
+
+    $(placeElement).find('#place-change').appendTo($(placeElement).find('#google-icon-div'))
+
+    $(placeElement).removeClass('placeHover')
+
+    callback()
+    
 }
 
-const clickPlaceDiv = () => {
-    $('.place').click(function() {
-        const places = $('.places')
-        const placesFirstChild = places.children().first()
-        
+const removeContent = (placeElement) => {
+    $(placeElement).find('.controlPlaceDiv').css({'display':'none'})
+    $(placeElement).find('#place-name').css({'margin-top':'0'})
+    $(placeElement).find('#place-type').css({'margin-bottom':'0', 'padding-bottom':'0', 'border-bottom':'0'})
 
-        if ($(this).is(':first-child')) {
-            $(this).prependTo(places).fadeIn()
-            // places.prepend($(this)).fadeIn();
-        } else {
-            placesFirstChild.removeClass('placi', 500)
-                // places.prepend($(this), 500);
-                // $(this).hide();
-                $(this).hide().prependTo(places).fadeIn()
-                // $(this).slideToggle();
+    $(placeElement).find('.chartDiv').css({'display':'none'})
+    $(placeElement).find('.addedText').css({'display':'none'})
+    $(placeElement).find('.properties').removeClass('propertiess');
 
-        }
-
-
-        $(this).toggleClass('placi', 500); 
-
-        places.scrollTop(0);
-
-        addContent(this)
-        
-    })
+    $(placeElement).find('.properties').append($(placeElement).find('#place-change'))
+    $(placeElement).find('#place-change').css({'margin-top':'10px'})
+    
+    
+    $(placeElement).find('.placeButtons').css({'display':'none',})
+    $(placeElement).addClass('placeHover')
 }
 
-// <img src="${place['google_images'][0]}" id="populationImg">\
 
+const clickPlaceDiv = (placeDiv) => {
+
+    if ($(placeDiv).width() > 200) {
+        return null
+    }
+
+    const places = $('.places')
+    const placesFirstChild = places.children().first()
+    
+
+    if ($(placeDiv).is(':first-child')) {
+        // $(placeDiv).prependTo(places).fadeIn()
+    } else {
+        removeContent(placesFirstChild)
+        $(placesFirstChild).removeClass('placi', 500)
+        // $(placeDiv).hide().prependTo(places).fadeIn()
+    }
+
+    const placeAriaLabel = ($(placeDiv).attr("aria-label"))
+    console.log(getPlaceObjFromLS(placeAriaLabel))
+    const placeData = getPlaceObjFromLS(placeAriaLabel).data
+
+    $(placeDiv).addClass('placi', 500, () => {
+        $(placeDiv).off('click')
+        
+        addContent(placeDiv, () => {
+            // $(placeElement).hide().show()
+            currentChart = makeChart(placeData, $(placeDiv));
+        })
+        
+    }); 
+
+    places.scrollTop(0);
+
+    // if ($(placeDiv).hasClass('placi')) {
+    //     removeContent(placeDiv)
+    // } else {
+        
+    // }     
+}
+
+const copyMessage = (copyElement) => {
+    var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(copyElement).parent('.addedPropsDiv').find('.propData').find('p').text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+const minimizePlace = (minimizeIcon) => {
+    placeDiv = $(minimizeIcon).closest('.place')
+    removeContent(placeDiv)
+    $(placeDiv).removeClass('placi', 500)
+}
 
 // <canvas id="myChart" width="100" height="100"></canvas>
 // $(".places").html($(".places").html() + kaki)

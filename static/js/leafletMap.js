@@ -1,29 +1,31 @@
-let place = JSON.parse(localStorage.getItem("place"))
+// // let place = JSON.parse(localStorage.getItem("place"))
 
-let placeName = ''
-let report = ''
-// const lat = 32.0750224
-// const lng = 34.7749395 
-let lat = ''
-let lng = ''
+// let placeName = ''
+// let report = ''
+// // const lat = 32.0750224
+// // const lng = 34.7749395 
+// let lat = ''
+// let lng = ''
 
-const setLastPlace = (place) => {
-    if ('google_name' in place) {
-        placeName = place['google_name']
-    } else {
-        placeName = place['name'].split(',')[0]
-    }
-    if (('live_population' in place) && place['live_population']['live_report'] != null) {
-        report = place['live_population']['live_report']
-    } else {
-        report = 'אין שידור חי'
-    }
+// const setLastPlace = (placeName) => {
+
+//     place = getPlaceObjFromLS(placeName)
+
+//     if ('google_name' in place) {
+//         placeName = place['google_name']
+//     } else {
+//         placeName = place['name'].split(',')[0]
+//     }
+//     if (('live_population' in place) && place['live_population']['live_report'] != null) {
+//         report = place['live_population']['live_report']
+//     } else {
+//         report = 'אין שידור חי'
+//     }
     
-    lat = place['location']['lat']
-    lng = place['location']['lng']
-}
+//     lat = place['location']['lat']
+//     lng = place['location']['lng']
+// }
 
-setLastPlace(place)
 
 var manIcon = L.icon({
     iconUrl: '/static/img/placeholder.png',
@@ -45,18 +47,35 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'your.mapbox.access.token'
 }).addTo(mymap);
 
-const addMarker = (callback) => {
+const addMarker = (placeName, callback) => {
+
+    const place = getPlaceObjFromLS(placeName).data
+
+    let placeNameShort = ''
+    let report = ''
+
+    if ('google_name' in place) {
+        placeNameShort = place['google_name']
+    } else {
+        placeNameShort = place['name'].split(',')[0]
+    }
+    if (('live_population' in place) && place['live_population']['live_report'] != null) {
+        report = place['live_population']['live_report']
+    } else {
+        report = 'אין שידור חי'
+    }
+    
+    const lat = place['location']['lat']
+    const lng = place['location']['lng']
+
     mymap.setView([lat, lng], 16)
     var marker = L.marker([lat, lng], {icon: manIcon}).addTo(mymap);
-    marker.bindPopup(`<b>${placeName}</b><br><i class="fas fa-users" style="padding: 6px; padding-right:0;"></i>${report}`).openPopup(); 
+    marker.bindPopup(`<b>${placeNameShort}</b><br><i class="fas fa-users" style="padding: 6px; padding-right:0;"></i>${report}`).openPopup(); 
     callback()
     // $(".places").html($(".places").html() + createPlaceCube())
 }
 
-addMarker(() => {
-    $(".places").html(createPlaceCube() + $(".places").html())
-    clickPlaceDiv()
-})
+
 
 
 
