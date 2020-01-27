@@ -3,8 +3,11 @@ class Place {
         this.name = placeName;
         this.data = data;
         this.type = this.data['type']
-        this.livePopulation = this.data['live_population']
-        this.timeSet = this.livePopulation['time']
+        if (this.data['livePopulation']) {
+            this.livePopulation = this.data['live_population']
+            this.timeSet = this.livePopulation['time']
+        }
+        
     }
 
     get change() {

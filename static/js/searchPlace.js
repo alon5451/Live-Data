@@ -6,6 +6,7 @@ input.addEventListener("keyup", (event) => {
             localStorage.setItem("placesObj", JSON.stringify([]));
         }
         if (window.location.href=='http://localhost:9090/') {
+            localStorage.setItem("placesObj", JSON.stringify([]));
             loadIndexStyle()
         } else if (window.location.href.replace(window.location.search,"")=='http://localhost:9090/dashboard') {
             loadDashboardStyle()
@@ -43,12 +44,12 @@ const getLive = (placeName, callback) => {
             })
             
             
-
-            document.getElementById("locationAnimation").style.display = 'none';
-            document.getElementById("topBar").style.opacity = 1;
-            document.getElementById("mapid").style.opacity = 1;
+            $('#mapid').css({'animation':'example 1s 0 alternate'});
+            // document.getElementById("locationAnimation").style.display = 'none';
+            // document.getElementById("topBar").style.opacity = 1;
+            // document.getElementById("mapid").style.opacity = 1;
             document.getElementById("searchTextField").disabled = false;
-            document.getElementById("searchTextField").value = '';
+            // document.getElementById("searchTextField").value = '';
         }          
         
         
@@ -69,10 +70,11 @@ const loadIndexStyle = () => {
 }
 
 const loadDashboardStyle = () => {
-    document.getElementById("locationAnimation").style.display = 'block';
-    document.getElementById("topBar").style.opacity = 0.3;
-    document.getElementById("mapid").style.opacity = 0.05;
+    // document.getElementById("locationAnimation").style.display = 'block';
+    // document.getElementById("topBar").style.opacity = 0.3;
+    // document.getElementById("mapid").style.opacity = 0.05;
     document.getElementById("searchTextField").disabled = true;
+    $('#mapid').css({'animation':'example 1s infinite alternate'});
 }
 
 

@@ -7,10 +7,6 @@ const createPlaceCube = (placeName) => {
 
     const imgDiv = `<div id='google-icon-div'>\
                         <img src="${place['google_api_info'][0]['icon']}" id="google-icon">\
-                        <div class="controlPlaceDiv">\
-                            <i class="fas fa-times closePlace"></i>\
-                            <i class="fas fa-window-minimize minimizePlace" onclick="minimizePlace(this)"></i>\
-                        </div>\
                     </div>`
     const placeNameDiv = `<div id="place-name">\
                             <p>${place['google_name']}</p>\
@@ -30,8 +26,10 @@ const createPlaceCube = (placeName) => {
                                 <p>אין שידור חי</p>\
                             </div>`
 
+    let liveReport = ''
     if (place['live_population']['live_height']!=null){
         console.log(place['live_population'])
+        liveReport = place['live_population']['live_report']
 
         if (liveHeight > usualHeight) {
             changePrecent = (((liveHeight-usualHeight)/usualHeight)*100)
@@ -45,7 +43,9 @@ const createPlaceCube = (placeName) => {
         placeChangeDiv = `<div id="place-change">\
                                     <p>${arrow}  ${changePrecent}%  ${arrow}</p>\
                                 </div>`
-    } 
+    } else {
+        liveReport = 'אין שידור חי'
+    }
 
     let addedProps = {}
     for (prop in place) {
@@ -78,6 +78,10 @@ const createPlaceCube = (placeName) => {
     
     // location icon clickkkkkk
     const mainDiv = `<div class="place placeHover" onclick="clickPlaceDiv(this)" aria-label='${placeName}'>\
+                        <div class="controlPlaceDiv">\
+                            <i class="fas fa-times closePlace"></i>\
+                            <i class="fas fa-window-minimize minimizePlace" onclick="minimizePlace(this)"></i>\
+                        </div>\
                         ${imgDiv}\
                         <div class='properties'>\
                         ${placeNameDiv}\
@@ -88,14 +92,15 @@ const createPlaceCube = (placeName) => {
                         </div>\
                         </div>\
                         <div class="placeButtons">
-                        <a href="#"> <i class="fas fa-calendar-day"></i></a>\
-                        <a href="#"> <i class="fab fa-google"></i></a>\
-                        <a href="#"> <i class="fas fa-images"></i></a>\
-                        <a href="#"> <i class="fas fa-cloud-sun"></i></a>\
+                        <i class="fas fa-calendar-day placeButton"></i>\
+                        <a target="_blank" href="https://www.google.co.il/search?q=${place['name']}"> <i class="fab fa-google placeButton"></i></a>\
+                        <a onclick="openImage(this)"><i class="fas fa-images placeButton">
+                        </i><img id="image-placeholder" src="${place['google_images'][0]}"></a>\
+                        <i class="fas fa-cloud-sun placeButton"></i>\
                         </div>\
                         <div class="chartDiv">\
-                            <p style="color: white; font-size:13px;">\
-                            כרגע <b>${place['live_population']['live_report']}</b></p>\
+                            <p style="color: white; font-size:13px; margin-top:20px">\
+                            כרגע <b>${liveReport}</b></p>\
                             <p style="color: white; font-size:12px; font-style:italic; color: indianred">\
                             (${place['live_population']['time']})</p>\
                             <canvas id="myChart" width='180' height="150"></canvas>\
@@ -110,20 +115,32 @@ const addContent = (placeElement, callback) => {
     $(placeElement).find('#place-name').css({'margin-top':'15px'})
     $(placeElement).find('#place-type').css({'padding-bottom': '10px'})
 
-    const titleHeight = $(placeElement).find('#place-type').outerHeight() + $(placeElement).find('#place-name').outerHeight()
+    let titleHeight = ''
+    console.log($(placeElement).find('#place-type').length)
+    if ($(placeElement).find('#place-type').length) {
+        titleHeight = $(placeElement).find('#place-type').height() + $(placeElement).find('#place-name').height()
+        $(placeElement).find('.addedText').css({'display':'block', 'margin-top':`15px`})
+        console.log(titleHeight)
+    } else {
+        titleHeight = $(placeElement).find('#place-name').height()
+        $(placeElement).find('.addedText').css({'display':'block', 'margin-top':`38px`})
+    }
+    
     $(placeElement).find('.chartDiv').css({'display':'block'})
     
     const chartWidth = $(placeElement).find('.chartDiv').width()
-    $(placeElement).find('.placeButtons').css({'display':'block', 'height':`${titleHeight-20}px`, 'width':`${chartWidth}px`,})
+    $(placeElement).find('.placeButtons').css({'display':'block', 'width':`${Math.max($(placeElement).find('.chartDiv').width()-50,120)}px`})
     // $(placeElement).find('.chartDiv').hide().delay(500).fadeIn()
-    $(placeElement).find('.addedText').css({'display':'block'})
+    
     let addedHeight = $(placeElement).find('.addedText').height()
 
     if (addedHeight<170) {
         addedHeight = 170
     }
 
-    $(placeElement).find('.chartDiv').children('p').eq(1).css({'padding-bottom': `${addedHeight-150}px`})
+    // $(placeElement).find('.chartDiv').children('p').eq(1).css({'padding-bottom': `${addedHeight-150}px`})
+    $(placeElement).find('.chartDiv').children('p').eq(1).css({'padding-bottom': `20px`})
+
     $(placeElement).find('.properties').toggleClass('propertiess');
 
     $(placeElement).find('#place-change').css({'margin-top':'0'})
@@ -165,10 +182,16 @@ const clickPlaceDiv = (placeDiv) => {
     
 
     if ($(placeDiv).is(':first-child')) {
+        $('.places').animate({
+            scrollTop: 0},
+            'slow');
         // $(placeDiv).prependTo(places).fadeIn()
     } else {
-        removeContent(placesFirstChild)
-        $(placesFirstChild).removeClass('placi', 500)
+        $('.places').animate({
+            scrollTop: $(placeDiv).offset().top},
+            'slow');
+        // removeContent(placesFirstChild)
+        // $(placesFirstChild).removeClass('placi', 500)
         // $(placeDiv).hide().prependTo(places).fadeIn()
     }
 
@@ -181,12 +204,20 @@ const clickPlaceDiv = (placeDiv) => {
         
         addContent(placeDiv, () => {
             // $(placeElement).hide().show()
-            currentChart = makeChart(placeData, $(placeDiv));
+            if (placeData['live_population']['live_height'] != null) {
+                currentChart = makeChart(placeData, $(placeDiv));
+            } else {
+                $(placeDiv).find($('#myChart').hide())
+                $(placeDiv).find($('.chartDiv')).css({'margin-left':'10%'})
+            }
+            
         })
         
+        
     }); 
+    
 
-    places.scrollTop(0);
+    // places.scrollTop(0);
 
     // if ($(placeDiv).hasClass('placi')) {
     //     removeContent(placeDiv)
@@ -205,8 +236,15 @@ const copyMessage = (copyElement) => {
 
 const minimizePlace = (minimizeIcon) => {
     placeDiv = $(minimizeIcon).closest('.place')
-    removeContent(placeDiv)
-    $(placeDiv).removeClass('placi', 500)
+    $(placeDiv).hide(() => {
+        removeContent(placeDiv)
+        $(placeDiv).removeClass('placi')
+        $(placeDiv).fadeIn()
+    })
+}
+
+const openImage = (imageIcon) => {
+    $(imageIcon).find('#image-placeholder').css({'display':'block'})
 }
 
 // <canvas id="myChart" width="100" height="100"></canvas>

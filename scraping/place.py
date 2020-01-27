@@ -9,7 +9,7 @@ import json
 
 def type_prop(p):
     try:
-        place_type = p.find('span', class_='YhemCb').text
+        place_type = ' | '.join([s.text for s in p.findAll('span', class_='YhemCb')])
     except:
         try:
             place_type = p.find('div', class_='kpS1Ac').text

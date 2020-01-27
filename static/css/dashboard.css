@@ -142,7 +142,7 @@ p {
     /* cursor: pointer; */
 }
 
-.places :first-child {
+.places :first-child.place {
     margin-top: 0;
 }
 
@@ -195,7 +195,8 @@ p {
     width: auto;
     height:50px;
     position: absolute;
-    top: 20px;
+    color: white;
+    /* top: 20px; */
     margin: 15px;
     margin-top: 5;
 }
@@ -352,8 +353,43 @@ p {
 
 .placeButtons {
     display: none;
-    margin-left: 20px;
+    /* position: absolute; */
+    /* margin-left: 20px; */
     color: whitesmoke;
+    width: 150px;
+    height: 85px; 
+    margin-left: 8%;
+}
+
+.placeButton {
+    font-size: 20px;
+    margin: 15px;
+
+    /* margin-top: 15%; */
+    color: aqua;
+}.placeButton.fa-cloud-sun{
+    color: yellowgreen;
+}.placeButton.fa-images{
+    color: burlywood;
+}.placeButton.fa-google{
+    color: brown;
+    margin-top: 0;
+}.placeButton.fa-calendar-day{
+    font-size: 22px;
+    color: blueviolet;
+    margin-top: 0;
+}
+
+.placeButton:hover {
+    -webkit-transform: rotateZ(-20deg) scale(1.4);
+    -ms-transform: rotateZ(-20deg) scale(1.4);
+    transform: rotateZ(-20deg) scale(1.4);
+    transition: 0.1s ease;
+    cursor: pointer;
+}
+
+#image-placeholder {
+    display: none;
 }
 
 .chartDiv {
