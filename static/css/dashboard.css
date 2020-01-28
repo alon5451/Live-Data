@@ -285,6 +285,8 @@ p {
     padding: 3px;
     padding-top: 0;
     /* border-left: 1px solid #86377B; */
+} .propData::-webkit-scrollbar {
+    display: none;
 }
 
 #copyMessage {
@@ -313,6 +315,9 @@ p {
     color: whitesmoke;
     cursor: pointer;
     /* box-shadow: 0px 0px 5px 1px #888888; */
+}
+.propData:hover::-webkit-scrollbar {
+    display: block;
 }
 
 /* .propData:last-child {
