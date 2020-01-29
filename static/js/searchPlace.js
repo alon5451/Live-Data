@@ -45,10 +45,13 @@ const getLive = (placeName, callback) => {
             
             
             $('#mapid').css({'animation':'example 1s 0 alternate'});
+            $('.places').css({'animation':'example 1s 0 alternate'});
             // document.getElementById("locationAnimation").style.display = 'none';
             // document.getElementById("topBar").style.opacity = 1;
             // document.getElementById("mapid").style.opacity = 1;
             document.getElementById("searchTextField").disabled = false;
+            document.getElementByClassName("searchTextField").disabled = false;
+            document.getElementById("mapid").disabled = false;
             // document.getElementById("searchTextField").value = '';
         }          
         
@@ -74,7 +77,9 @@ const loadDashboardStyle = () => {
     // document.getElementById("topBar").style.opacity = 0.3;
     // document.getElementById("mapid").style.opacity = 0.05;
     document.getElementById("searchTextField").disabled = true;
+    document.getElementById("mapid").disabled = true;
     $('#mapid').css({'animation':'example 1s infinite alternate'});
+    $('.places').css({'animation':'example 1s infinite alternate'});
 }
 
 

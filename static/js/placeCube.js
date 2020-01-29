@@ -6,7 +6,7 @@ const createPlaceCube = (placeName) => {
     const place = getPlaceObjFromLS(placeName).data
 
     const imgDiv = `<div id='google-icon-div'>\
-                        <img src="${place['google_api_info'][0]['icon']}" id="google-icon">\
+                        <img src="${place['google_api_info'][0]['icon']}" id="google-icon" />\
                     </div>`
     const placeNameDiv = `<div id="place-name">\
                             <p>${place['google_name']}</p>\
@@ -95,7 +95,7 @@ const createPlaceCube = (placeName) => {
                         <i class="fas fa-calendar-day placeButton"></i>\
                         <a target="_blank" href="https://www.google.co.il/search?q=${place['name']}"> <i class="fab fa-google placeButton"></i></a>\
                         <a onclick="openImage(this)"><i class="fas fa-images placeButton">
-                        </i><img id="image-placeholder" src="${place['google_images'][0]}"></a>\
+                        </i><div id="div-image-placeholder"><img id="image-placeholder" src="${place['google_images'][0]}"></div></a>\
                         <i class="fas fa-cloud-sun placeButton"></i>\
                         </div>\
                         <div class="chartDiv">\
@@ -111,6 +111,8 @@ const createPlaceCube = (placeName) => {
 }
 
 const addContent = (placeElement, callback) => {
+    $(placeElement).removeClass('placeHover')
+
     $(placeElement).find('.controlPlaceDiv').css({'display':'block'})
     $(placeElement).find('#place-name').css({'margin-top':'15px'})
     $(placeElement).find('#place-type').css({'padding-bottom': '10px'})
@@ -127,7 +129,8 @@ const addContent = (placeElement, callback) => {
     }
     
     $(placeElement).find('.chartDiv').css({'display':'block'})
-    
+    // $(placeElement).find('#myChart').css({'display':'none'})
+
     const chartWidth = $(placeElement).find('.chartDiv').width()
     $(placeElement).find('.placeButtons').css({'display':'block', 'width':`${Math.max($(placeElement).find('.chartDiv').width()-50,120)}px`})
     // $(placeElement).find('.chartDiv').hide().delay(500).fadeIn()
@@ -147,13 +150,14 @@ const addContent = (placeElement, callback) => {
 
     $(placeElement).find('#place-change').appendTo($(placeElement).find('#google-icon-div'))
 
-    $(placeElement).removeClass('placeHover')
+    
 
     callback()
     
 }
 
 const removeContent = (placeElement) => {
+    $(placeElement).addClass('placeHover')
     $(placeElement).find('.controlPlaceDiv').css({'display':'none'})
     $(placeElement).find('#place-name').css({'margin-top':'0'})
     $(placeElement).find('#place-type').css({'margin-bottom':'0', 'padding-bottom':'0', 'border-bottom':'0'})
@@ -167,7 +171,7 @@ const removeContent = (placeElement) => {
     
     
     $(placeElement).find('.placeButtons').css({'display':'none',})
-    $(placeElement).addClass('placeHover')
+    
 }
 
 
@@ -199,16 +203,71 @@ const clickPlaceDiv = (placeDiv) => {
     console.log(getPlaceObjFromLS(placeAriaLabel))
     const placeData = getPlaceObjFromLS(placeAriaLabel).data
 
-    $(placeDiv).addClass('placi', 500, () => {
+    
+    $(placeDiv).addClass('placi', () => {
         $(placeDiv).off('click')
         
         addContent(placeDiv, () => {
+            
             // $(placeElement).hide().show()
             if (placeData['live_population']['live_height'] != null) {
-                currentChart = makeChart(placeData, $(placeDiv));
+                // divLeftHeight = $(placeElement).find('#google-icon-div').outerHeight() + $(placeElement).find('.placeButtons').outerHeight() + $(placeElement).find('.chartDiv').outerHeight()
+                // divRightHeight = $(placeElement).find('#google-icon-div').height() + $(placeElement).find('.properties').height()
+                // // $(placeDiv).find($('#myChart').hide())
+                
+                // $(placeElement).css({'height':`${Math.max(divLeftHeight,divRightHeight)}`})
+                // $(placeDiv).find('.chartDiv').hide()
+
+                // $(placeDiv).find('.chartDiv').hide()
+                // $(placeDiv).find('.placeButtons').hide()
+                // setTimeout(function () {
+                //     $(placeDiv).find('.placeButtons').fadeIn()
+                //     $(placeDiv).find('#myChart').css({'opacity':'0'})
+                //     $(placeDiv).find('.chartDiv').fadeIn()
+                //     // $(placeDiv).find($('.chartDiv').show())
+                // }, 307);
+                
+                // setTimeout(function () {
+                //     currentChart = makeChart(placeData, $(placeDiv));
+                //     // $(placeDiv).find($('#myChart').show())
+                // }, 500);
+
+
+
+
+
+                $(placeDiv).find('.chartDiv').css({'opacity':'0', 'display':'none'})
+                $(placeDiv).find('.placeButtons').hide()
+                setTimeout(function () {
+                    $(placeDiv).find('.placeButtons').fadeIn()
+                    $(placeDiv).find('.chartDiv').css({'opacity':'0'})
+                    $(placeDiv).slideDown(() => {
+                        $(placeDiv).find('.chartDiv').slideDown(function() {
+                            $(this).animate({'opacity':'1'})
+                        })
+                    })
+                    
+                    // $(placeDiv).find($('.chartDiv').show())
+                }, 270);
+                
+                setTimeout(function () {
+                    currentChart = makeChart(placeData, $(placeDiv));
+                    // $(placeDiv).find($('#myChart').show())
+                }, 500);
+                // $(placeDiv).addClass('xx')
+                // currentChart = makeChart(placeData, $(placeDiv));
+
             } else {
-                $(placeDiv).find($('#myChart').hide())
-                $(placeDiv).find($('.chartDiv')).css({'margin-left':'10%'})
+                $(placeDiv).find('#myChart').css({'display':'none'})
+                $(placeDiv).find('.chartDiv').hide()
+                $(placeDiv).find('.placeButtons').hide()
+                setTimeout(function () {
+                    $(placeDiv).find('.placeButtons').fadeIn()
+                    
+                    $(placeDiv).find('.chartDiv').fadeIn()
+                    // $(placeDiv).find($('.chartDiv').show())
+                }, 310);
+                $(placeDiv).find('.chartDiv').css({'margin-left':'5%'})
             }
             
         })
@@ -236,15 +295,16 @@ const copyMessage = (copyElement) => {
 
 const minimizePlace = (minimizeIcon) => {
     placeDiv = $(minimizeIcon).closest('.place')
-    $(placeDiv).hide(() => {
-        removeContent(placeDiv)
-        $(placeDiv).removeClass('placi')
-        $(placeDiv).fadeIn()
-    })
+    // $(placeDiv).hide(() => {
+    removeContent(placeDiv)
+    $(placeDiv).removeClass('placi')
+        // $(placeDiv).show()
+    // })
 }
 
 const openImage = (imageIcon) => {
-    $(imageIcon).find('#image-placeholder').css({'display':'block'})
+    // $(imageIcon).find('#image-placeholder').css({'display':'block', 'top':`${$('#google-icon-div').height()}px`}).appendTo('.placeImage')
+    $(imageIcon).find('#div-image-placeholder').css({'display':'block'}).appendTo('.placeImage')
 }
 
 // <canvas id="myChart" width="100" height="100"></canvas>

@@ -69,6 +69,7 @@ p {
     margin-top: 3%;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
 }
 
 #mapid { 
@@ -83,7 +84,7 @@ p {
  }
 
 .places {
-    /* position: absolute; */
+    position: absolute;
     height: 100%;
     width: auto;
     direction: ltr;
@@ -118,6 +119,14 @@ p {
     margin-left: auto;
     margin-right: auto;
     padding: 3px;
+    
+}
+
+.placeHover {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    transition: 0.1s ease;
 }
 
 .placi {
@@ -136,6 +145,10 @@ p {
     padding-bottom: 20px;
     /* background-image: linear-gradient(to right, #86377b 20%, #27273c 80%); */
     /* margin-left: 240px; */
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    transition: 0.5s ease;
 }
 
 .placi:hover {
@@ -393,9 +406,23 @@ p {
     cursor: pointer;
 }
 
-#image-placeholder {
-    display: none;
+.placeImage {
+    width: 100%;
+    height: 100%;
 }
+
+#div-image-placeholder {
+    z-index: 1000;
+    display: none;
+    position: absolute;
+    margin: 0 auto;
+    height: 50%;
+}
+
+#image-placeholder {
+    height: 100%;
+}
+
 
 .chartDiv {
     display: none;
@@ -403,6 +430,7 @@ p {
     margin-right: 10px; 
     height: auto; 
     margin-top: 1%;
+    width: 150px;
     float: left;
 }
 

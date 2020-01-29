@@ -5,15 +5,15 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
     <link rel="stylesheet" href="/static/css/permanent.css">
     <link rel="stylesheet" href="/static/css/dashboard.css">
 
-    
+
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-   crossorigin=""></script>
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
 
 
     <script src="https://kit.fontawesome.com/fc984ea31b.js" crossorigin="anonymous"></script>
@@ -24,44 +24,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.3/lottie.js"></script>
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places&language=he"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 
     <script>
-       
+
     </script>
 
 <body>
-    
-    
+
+
     <div id="topBar">
 
         <a href="./" id="populationImgDiv">
             <img src="/static/img/location1.png" id="populationImg">
         </a>
-    
+
         {% include '/partials/searchBox.html' %}
     </div>
 
     <div id="locationAnimation"></div>
     <div id="content">
-        
+
         <div id="mapid">
+            <div class="placeImage"></div>
             <!-- <div class="leaflet-bottom leaflet-left">
                 <input type="button" id="Btn1" value="Btn1" onclick="" class="btnStyle span3" />
                 
             </div> -->
-            
-            
+
+
             <!-- <div id="button-wrapper" class='leaflet-control'>
                 <button type="button" class="btn-minimize"><i class="far fa-window-restore" ></i></button>
              </div>  -->
-             <!-- <div id="button-wrapper">
+            <!-- <div id="button-wrapper">
                 <button type="button" class="btn-minimize" style="background-color:whitesmoke;"><img src="https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png" style="height: 20px;"></button>
              </div>   -->
-             <div id="places" class="places leaflet-control">
-                
-               <!-- <div class="place placi">
+
+            <!-- <div class="place placi">
                         <div>
                             <img src="https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png" id="google-icon">
                             <div id="place-change">
@@ -107,13 +107,13 @@
                         <!-- <div valign='bottom' class="placeFooter" style="height: 50px; bottom: 0;">
 
                         </div> -->
-                        <!-- <img src="https://lh5.googleusercontent.com/p/AF1QipN4_D_aq0NG3NCZxGXvZ21V-PmG1BS59iQhc5ri=w323-h160-k-no" id="google-street-view"> -->
+            <!-- <img src="https://lh5.googleusercontent.com/p/AF1QipN4_D_aq0NG3NCZxGXvZ21V-PmG1BS59iQhc5ri=w323-h160-k-no" id="google-street-view"> -->
 
-                        
-                        
 
-                    
-                <!-- </div>
+
+
+
+            <!-- </div>
                 <div class="place">
                     <div>
                         <img src="https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png" id="google-icon">
@@ -169,16 +169,16 @@
                 
                 </div> -->
 
-            </div>
-
-            <!-- <div class="place-props leaflet-control">
-                <div id="container" style="height: 100px; width: 200px;"></div>
-            </div> -->
-             
         </div>
 
-        
-        
+        <!-- <div class="place-props leaflet-control">
+                <div id="container" style="height: 100px; width: 200px;"></div>
+            </div> -->
+        <div id="places" class="places leaflet-control">
+        </div>
+
+
+
     </div>
     <script src="/static/js/handleLocalStorage.js"></script>
     <script src="/static/js/placeClass.js"></script>
@@ -188,7 +188,7 @@
         $('.leaflet-control').hide()
     </script>
     <script src="/static/js/chartJs.js"></script>
-    
+
     <script src="/static/js/placeCube.js"></script>
     <script src="/static/js/delivery.js"></script>
     <script src="/static/js/leafletMap.js"></script>
@@ -204,11 +204,11 @@
         animation();
         $('.leaflet-control').show()
         $('.leaflet-control-attribution').hide();
-        
-        
+
+
     </script>
     <script>
-       
+
 
 
 
