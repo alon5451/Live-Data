@@ -1,0 +1,33 @@
+<html dir="rtl">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/permanent.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+
+    <script src="https://kit.fontawesome.com/fc984ea31b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.3/lottie.js"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places&language=he"></script>
+<body>
+    <div id="locationAnimation"></div>
+
+    <img src="/static/img/location1.png" id="populationImg">
+
+    {% include '/partials/searchBox.html' %}
+
+    {% include '/partials/wavesFooter.html' %}
+    
+    <script src="/static/js/handleLocalStorage.js"></script>
+    <script src="/static/js/placeClass.js"></script>
+    <script src="/static/js/delivery.js"></script>
+    <script src="/static/js/autocomplete.js"></script>
+    <script src="/static/js/searchPlace.js"></script>
+
+</body>
+
+
+</html>

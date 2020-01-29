@@ -1,6 +1,10 @@
 function initialize() {
     var input = document.getElementById('searchTextField');
-    new google.maps.places.Autocomplete(input);
+    var options = {
+        types: ['establishment']
+      };
+      
+    new google.maps.places.Autocomplete(input, options);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
