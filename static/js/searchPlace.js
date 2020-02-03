@@ -24,8 +24,26 @@ const getLive = (placeName, callback) => {
     const fetchingUrl = `http://localhost:9090/place?name=${placeName}`
 
     $.get(fetchingUrl, (res, err) => {        
-
-        
+        console.log(res)
+        if (res['error']) {
+            try {
+                $('#mapid').css({'animation':'example 1s 0 alternate'});
+                $('.places').css({'animation':'example 1s 0 alternate'});
+                document.getElementById("searchTextField").disabled = false;
+                document.getElementByClassName("searchTextField").disabled = false;
+            } catch {
+                document.getElementById("populationImg").style.display = 'block';
+                document.getElementById("locationAnimation").style.display = 'none';
+                document.getElementsByClassName("searchBox")[0].style.opacity = 1;
+                document.getElementById("searchTextField").disabled = false;
+                document.getElementsByClassName("waveAnimation")[0].style.opacity = 1;
+            }
+            if (res['error']=='couldn\'t set knowledge panel') {
+                alert('המקום לא נמצא. אנא חפש מקום אחר, או שנה את הניסוח')
+            }
+            
+            return null
+        }
         
         // localStorage.setItem("place", JSON.stringify(res));
         // console.log(new Place(res))
@@ -34,7 +52,7 @@ const getLive = (placeName, callback) => {
             
             window.location.href = `./dashboard?search=${res['name']}`;
         } else if (window.location.href.replace(window.location.search,"")=='http://localhost:9090/dashboard') {
-
+            console.log(window.location.search != '')
             insertPlaceObjToLS(new Place(placeName, data=res))
             
             // const place = JSON.parse(localStorage.getItem("place"))
@@ -51,7 +69,6 @@ const getLive = (placeName, callback) => {
             // document.getElementById("mapid").style.opacity = 1;
             document.getElementById("searchTextField").disabled = false;
             document.getElementByClassName("searchTextField").disabled = false;
-            document.getElementById("mapid").disabled = false;
             // document.getElementById("searchTextField").value = '';
         }          
         
@@ -77,7 +94,6 @@ const loadDashboardStyle = () => {
     // document.getElementById("topBar").style.opacity = 0.3;
     // document.getElementById("mapid").style.opacity = 0.05;
     document.getElementById("searchTextField").disabled = true;
-    document.getElementById("mapid").disabled = true;
     $('#mapid').css({'animation':'example 1s infinite alternate'});
     $('.places').css({'animation':'example 1s infinite alternate'});
 }

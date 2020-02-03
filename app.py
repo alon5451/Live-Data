@@ -26,7 +26,10 @@ def dashboard():
 def get_tasks():
     placeName = request.args['name']
     place = Place(placeName)
-    place.set_props()
+    props = place.set_props()
+    if 'error' in props.keys():
+        return props
+
     place.google_api()
     # place.set_general_hours()
 #     alerts = list(get_alerts(fromDate, toDate).apply(lambda x: x.to_json(force_ascii=False), axis=1))
