@@ -188,6 +188,15 @@ class Place:
         place_type = type_prop(p)
         
         place_google_images = [img.find('img')['src'] for img in p.findAll('g-img')]
+        outside_view_link = []
+        for img in p.findAll('g-img'):
+            print(img.parent)
+            try:
+                outside_view_link.append(img.parent.href)
+            except: pass 
+        outside_view_link = []
+
+        # outside_view_link = [img.find('a')['href'] for img in p.findAll('rhsl5')]
 
         try:
             place_descrip = p.find('div', class_='hb8SAc').text
@@ -217,6 +226,7 @@ class Place:
         self.usual_time_spent = usual_time_spent
 
         self.google_images = place_google_images
+        self.outside_view_links = outside_view_link
         
         return self.__dict__
 
@@ -248,4 +258,4 @@ class Place:
 
 
 if __name__ == '__main__':
-    print(Place('כללית מרפאת מגדל המאה, שלמה אבן גבירול, תל אביב יפו, ישראל').set_props()) 
+    print(Place('דיזינגוף סנטר').set_props()['panel']) 

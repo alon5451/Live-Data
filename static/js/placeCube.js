@@ -12,6 +12,8 @@ const createPlaceCube = (placeName) => {
                             <p>${place['google_name']}</p>\
                         </div>`
 
+    console.log(place['outside_view_links'])
+
     let placeTypeDiv = ``
     if (place['type']) {
         placeTypeDiv = `<div id="place-type">\
@@ -95,7 +97,7 @@ const createPlaceCube = (placeName) => {
                         <i class="fas fa-calendar-day placeButton"></i>\
                         <a target="_blank" href="https://www.google.co.il/search?q=${place['name']}"> <i class="fab fa-google placeButton"></i></a>\
                         <a onclick="openImage(this)"><i class="fas fa-images placeButton">
-                        </i><div id="div-image-placeholder"><img id="image-placeholder" src="${place['google_images'][0]}"></div></a>\
+                        </i><img id="image-placeholder" src="${place['google_images'][0]}"></a>\
                         <i class="fas fa-cloud-sun placeButton"></i>\
                         </div>\
                         <div class="chartDiv">\
@@ -304,7 +306,9 @@ const minimizePlace = (minimizeIcon) => {
 
 const openImage = (imageIcon) => {
     // $(imageIcon).find('#image-placeholder').css({'display':'block', 'top':`${$('#google-icon-div').height()}px`}).appendTo('.placeImage')
-    $(imageIcon).find('#div-image-placeholder').css({'display':'block'}).appendTo('.placeImage')
+    $('.placeImage').find('#image-placeholder').remove()
+    $(imageIcon).find('#image-placeholder').clone().css({'display':'block'}).appendTo('.placeImage')
+    $('.placeImage').hide().fadeIn()
 }
 
 // <canvas id="myChart" width="100" height="100"></canvas>
