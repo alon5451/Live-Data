@@ -230,6 +230,15 @@ p {
     margin-top:1.5px;
 }
 
+.closePlace:hover {
+    cursor: pointer;
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+    /* transition: 0.3s ease; */
+}
+
+
 .minimizePlace {
     position:absolute; 
     font-size:12px;
@@ -420,7 +429,7 @@ p {
 
 .placeImage {
     /* display: none; */
-    width: 300px;
+    width: auto;
     height: 200px;
     margin-left: 48px;
     margin-top: 10px;
@@ -543,12 +552,40 @@ width: 6px;
     background: #555;
 }
 
+.footCircle {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    background-color: #27273C;
+    border-radius: 50%;
+    margin-top: 150px;
+    margin-right: 40%;
+}
 
 .generalView {
-    height: 400px;
+    height: 500px;
     width: 100%;
-    background-color: #003152;
+    background-color: #6666FF;
+    padding: 20px;
     /* background-image: linear-gradient(to bottom, #86377b 1%, #0A9DFF 99%); */
+}
+
+.shortlyPlaces {
+    width: 95%;
+    height: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-x: auto;
+    table-layout: fixed;
+}
+
+.shortPlace {
+    height: 200px;
+    width: 200px;
+    border: 1px solid white;
+    margin: 0 auto;
+    display: table-cell;
+    margin: 15px;
 }
 
 

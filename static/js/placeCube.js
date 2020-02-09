@@ -81,7 +81,7 @@ const createPlaceCube = (placeName) => {
     // location icon clickkkkkk
     const mainDiv = `<div class="place placeHover" onclick="clickPlaceDiv(this)" aria-label='${placeName}'>\
                         <div class="controlPlaceDiv">\
-                            <i class="fas fa-times closePlace"></i>\
+                            <i class="fas fa-times closePlace" onclick="closePlace(this)"></i>\
                             <i class="fas fa-window-minimize minimizePlace" onclick="minimizePlace(this)"></i>\
                         </div>\
                         ${imgDiv}\
@@ -293,6 +293,20 @@ const copyMessage = (copyElement) => {
   $temp.val($(copyElement).parent('.addedPropsDiv').find('.propData').find('p').text()).select();
   document.execCommand("copy");
   $temp.remove();
+}
+
+const closePlace = (minimizeIcon) => {
+    placeDiv = $(minimizeIcon).closest('.place')
+    // $(placeDiv).hide(() => {
+        // $(placeDiv).fadeOut(300, function(){ $(this).remove();});
+    $(placeDiv).animate({opacity: 0}, () => {
+        $(".places").hide()
+        $(placeDiv).remove()
+        $(".places").fadeIn()
+
+    });
+        // $(placeDiv).show()
+    // })
 }
 
 const minimizePlace = (minimizeIcon) => {

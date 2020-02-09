@@ -20,6 +20,18 @@ input.addEventListener("keyup", (event) => {
     }
 })
 
+const getLiveOfList = (placeType, placeCity) => {
+    const fetchingUrl = `http://localhost:9090/department?type=${placeType}&city=${placeCity}`
+
+    $.get(fetchingUrl, (res, err) => {
+        for (placeNameRes of JSON.parse(res)) {
+            getLive(placeNameRes)
+            // console.log(placeNameRes)
+        }
+        
+    })
+}
+
 const getLive = (placeName, callback) => {
     const fetchingUrl = `http://localhost:9090/place?name=${placeName}`
 
@@ -52,7 +64,6 @@ const getLive = (placeName, callback) => {
             
             window.location.href = `./dashboard?search=${res['name']}`;
         } else if (window.location.href.replace(window.location.search,"")=='http://localhost:9090/dashboard') {
-            console.log(window.location.search != '')
             insertPlaceObjToLS(new Place(placeName, data=res))
             
             // const place = JSON.parse(localStorage.getItem("place"))
