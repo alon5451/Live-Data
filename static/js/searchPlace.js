@@ -42,25 +42,35 @@ const getLiveOfList = (query, callback) => {
 
                 
             if (window.location.href.replace(window.location.search,"")=='http://localhost:9090/dashboard') {
-                    insertPlaceObjToLS(new Place(placeName, data=res))
+                    insertPlaceObjToLS(new Place(placeNameRes, data=res))
                     
                     // const place = JSON.parse(localStorage.getItem("place"))
-                    addMarker(placeName, () => {
-                        $(".places").html(createPlaceCube(placeName) + $(".places").html())
+                    addMarker(placeNameRes, () => {
+                        $(".places").html(createPlaceCube(placeNameRes) + $(".places").html())
+                        if (placeNameRes==JSON.parse(resi)[JSON.parse(resi).length-1]) {
+                            $('#mapid').css({'animation':'example 1s 0 alternate'});
+                            $('.places').css({'animation':'example 1s 0 alternate'});
+                            document.getElementById("searchTextField").disabled = false;
+                            $('#searchTextField').val('');
+                        }
                         // clickPlaceDiv()
                     })
+                    
                     
 
                 }          
                 
                 
             })
+            console.log(placeNameRes, JSON.parse(resi)[JSON.parse(resi).length-1])
+            
                     // $(".places").html(createPlaceCube(placeNameRes) + $(".places").html())
                     // console.log(placeNameRes)
-                }
-                
-            })
-            callback()
+        }
+        
+       
+    })
+        
         }
 
 const getLive = (placeName, callback) => {
