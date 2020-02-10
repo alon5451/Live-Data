@@ -11,29 +11,60 @@ input.addEventListener("keyup", (event) => {
         } else if (window.location.href.replace(window.location.search,"")=='http://localhost:9090/dashboard') {
             loadDashboardStyle()
         }          
-        
-        getLive(placeName, () => {
-            $(".places").html(createPlaceCube() + $(".places").html())
-        })
+        const typeClick = $('.dropdown').find('input').val()
+        console.log(typeClick)
+        if (typeClick=='general') {
+            window.location.href = `./dashboard?query=${placeName}`;
+            // getLiveOfList(placeName)
+        } else if (typeClick=='point') {
+            getLive(placeName, () => {
+                $(".places").html(createPlaceCube() + $(".places").html())
+            })
+        }
+  
+        // getLive(placeName, () => {
+        //     $(".places").html(createPlaceCube() + $(".places").html())
+        // })
         
         event.preventDefault();
     }
 })
 
-const getLiveOfList = (placeType, placeCity) => {
-    const fetchingUrl = `http://localhost:9090/department?type=${placeType}&city=${placeCity}`
+const getLiveOfList = (query, callback) => {
+    const fetchingUrli = `http://localhost:9090/department?query=${query}`
 
-    $.get(fetchingUrl, (res, err) => {
-        for (placeNameRes of JSON.parse(res)) {
-            getLive(placeNameRes)
-            // console.log(placeNameRes)
+    $.get(fetchingUrli, (resi, err) => {
+        for (placeNameRes of JSON.parse(resi)) {
+
+            const fetchingUrl = `./place?name=${placeNameRes}`
+
+            $.get(fetchingUrl, (res, err) => {        
+
+                
+            if (window.location.href.replace(window.location.search,"")=='http://localhost:9090/dashboard') {
+                    insertPlaceObjToLS(new Place(placeName, data=res))
+                    
+                    // const place = JSON.parse(localStorage.getItem("place"))
+                    addMarker(placeName, () => {
+                        $(".places").html(createPlaceCube(placeName) + $(".places").html())
+                        // clickPlaceDiv()
+                    })
+                    
+
+                }          
+                
+                
+            })
+                    // $(".places").html(createPlaceCube(placeNameRes) + $(".places").html())
+                    // console.log(placeNameRes)
+                }
+                
+            })
+            callback()
         }
-        
-    })
-}
 
 const getLive = (placeName, callback) => {
-    const fetchingUrl = `http://localhost:9090/place?name=${placeName}`
+    const fetchingUrl = `./place?name=${placeName}`
 
     $.get(fetchingUrl, (res, err) => {        
         console.log(res)
@@ -72,15 +103,10 @@ const getLive = (placeName, callback) => {
                 // clickPlaceDiv()
             })
             
-            
             $('#mapid').css({'animation':'example 1s 0 alternate'});
             $('.places').css({'animation':'example 1s 0 alternate'});
-            // document.getElementById("locationAnimation").style.display = 'none';
-            // document.getElementById("topBar").style.opacity = 1;
-            // document.getElementById("mapid").style.opacity = 1;
             document.getElementById("searchTextField").disabled = false;
-            document.getElementByClassName("searchTextField").disabled = false;
-            // document.getElementById("searchTextField").value = '';
+            $('#searchTextField').val('');
         }          
         
         

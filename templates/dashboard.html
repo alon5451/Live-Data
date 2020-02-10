@@ -54,18 +54,16 @@
         </div>
         <!-- <div class="footCircle"></div> -->
     </div>
-    <div class="generalView">
+    <!-- <div class="generalView">
         <div class="shortlyPlaces">
             <div class="shortPlace"></div>
             <div class="shortPlace"></div>
         </div>
-    </div>
+    </div> -->
     
     <script src="/static/js/handleLocalStorage.js"></script>
     <script src="/static/js/placeClass.js"></script>
     <script>
-        const placeName = '{{ placeName }}'
-
         $('.leaflet-control').hide()
     </script>
     <script src="/static/js/chartJs.js"></script>
@@ -77,10 +75,25 @@
     <script src="/static/js/searchPlace.js"></script>
     <script src="/static/js/buttons.js"></script>
     <script>
-        addMarker(placeName, () => {
-            // clickPlaceDiv()
-        })
-        $(".places").html(createPlaceCube(placeName) + $(".places").html())
+        const placeName = '{{ placeName }}'
+        const query = '{{ query }}'
+
+        if (query != '') {
+            loadDashboardStyle()
+            getLiveOfList(query, () => {
+                $('#mapid').css({'animation':'example 1s 0 alternate'});
+                $('.places').css({'animation':'example 1s 0 alternate'});
+                document.getElementById("searchTextField").disabled = false;
+                $('#searchTextField').val('');
+            })
+        } else {
+            addMarker(placeName, () => {
+                // clickPlaceDiv()
+                $(".places").html(createPlaceCube(placeName) + $(".places").html())
+            })
+        }
+        
+        // $(".places").html(createPlaceCube(placeName) + $(".places").html())
 
         animation();
         $('.leaflet-control').show()

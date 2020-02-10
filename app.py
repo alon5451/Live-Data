@@ -18,10 +18,12 @@ def home():
 def dashboard():
     try:
         placeName = request.args['search']
+        query = ''
     except:
+        query = request.args['query']
         placeName = 'null'
-
-    return render_template('/dashboard.html', placeName=placeName, google_api_key=google_api_key)
+    print(placeName, query)
+    return render_template('/dashboard.html', placeName=placeName, query=query, google_api_key=google_api_key)
 
 @app.route('/place', methods=['GET'])
 def get_place():
@@ -39,10 +41,8 @@ def get_place():
 
 @app.route('/department', methods=['GET'])
 def get_places():
-    placesCity = request.args['city']
-    placesType = request.args['type']
-    print(placesCity, placesType)
-    placesList = Department(placesType, placesCity).google_api_list()
+    query = request.args['query']
+    placesList = Department(query).google_api_list()
 
     # place.set_general_hours()
 #     alerts = list(get_alerts(fromDate, toDate).apply(lambda x: x.to_json(force_ascii=False), axis=1))
