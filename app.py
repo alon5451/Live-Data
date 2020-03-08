@@ -49,4 +49,5 @@ def get_places():
     print(placesList)
     return str(placesList)
 
-app.run(debug=True, port=9090, use_reloader=True)
+# app.run(debug=True, port=9090, use_reloader=True)
+app.run(port=9090)
