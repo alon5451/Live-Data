@@ -12,7 +12,6 @@ function removeA(arr) {
 function removeObj(arr, obj) {
     for (i = 0; i < arr.length; i++) {
         if (arr[i].name == obj.name) {
-            console.log('heyyy')
             arr.splice(i, i+1)
             break;
         }
@@ -31,13 +30,10 @@ const insertPlaceObjToLS = (placeObj) => {
 
     if (getPlaceObjFromLS(placeName)) {
         console.log(`The place ${placeName} is already at local storage, so he was updated!`)
-        console.log(placesObj.length)
         placesObj = removeObj(placesObj, placeObj)
-        console.log(placesObj.length)
         // return placesObj
     }
 
-    console.log(typeof placesObj)
     
     placesObj.push(placeObj)
     localStorage.setItem("placesObj", JSON.stringify(placesObj));

@@ -1,10 +1,10 @@
 const createPlaceCube = (placeName) => {
     // place=JSON.parse(localStorage.getItem("place"))
 
-    console.log(placeName)
+    // console.log(placeName)
 
     const place = getPlaceObjFromLS(placeName).data
-
+    
     const imgDiv = `<div id='google-icon-div'>\
                         <img src="${place['google_api_info'][0]['icon']}" id="google-icon" />\
                     </div>`
@@ -12,7 +12,7 @@ const createPlaceCube = (placeName) => {
                             <p>${place['google_name']}</p>\
                         </div>`
 
-    console.log(place['outside_view_links'])
+    // console.log(place['outside_view_links'])
 
     let placeTypeDiv = ``
     if (place['type']) {
@@ -30,7 +30,7 @@ const createPlaceCube = (placeName) => {
 
     let liveReport = ''
     if (place['live_population']['live_height']!=null){
-        console.log(place['live_population'])
+        // console.log(place['live_population'])
         liveReport = place['live_population']['live_report']
 
         if (liveHeight > usualHeight) {
@@ -97,7 +97,7 @@ const createPlaceCube = (placeName) => {
                         <i class="fas fa-calendar-day placeButton"></i>\
                         <a target="_blank" href="https://www.google.co.il/search?q=${place['name']}"> <i class="fab fa-google placeButton"></i></a>\
                         <a onclick="openImage(this)"><i class="fas fa-images placeButton">
-                        </i><img id="image-placeholder" src="${place['google_images'][0]}"></a>\
+                        </i><img id="image-placeholder" src="${place['google_images'][1]}"></a>\
                         <i class="fas fa-cloud-sun placeButton"></i>\
                         </div>\
                         <div class="chartDiv">\
@@ -120,11 +120,11 @@ const addContent = (placeElement, callback) => {
     $(placeElement).find('#place-type').css({'padding-bottom': '10px'})
 
     let titleHeight = ''
-    console.log($(placeElement).find('#place-type').length)
+    // console.log($(placeElement).find('#place-type').length)
     if ($(placeElement).find('#place-type').length) {
         titleHeight = $(placeElement).find('#place-type').height() + $(placeElement).find('#place-name').height()
         $(placeElement).find('.addedText').css({'display':'block', 'margin-top':`15px`})
-        console.log(titleHeight)
+        // console.log(titleHeight)
     } else {
         titleHeight = $(placeElement).find('#place-name').height()
         $(placeElement).find('.addedText').css({'display':'block', 'margin-top':`38px`})
@@ -202,7 +202,7 @@ const clickPlaceDiv = (placeDiv) => {
     }
 
     const placeAriaLabel = ($(placeDiv).attr("aria-label"))
-    console.log(getPlaceObjFromLS(placeAriaLabel))
+    // console.log(getPlaceObjFromLS(placeAriaLabel))
     const placeData = getPlaceObjFromLS(placeAriaLabel).data
 
     

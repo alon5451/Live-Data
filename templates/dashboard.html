@@ -80,11 +80,13 @@
 
         if (query != '') {
             loadDashboardStyle()
-            getLiveOfList(query, () => {
+            getLiveOfList(query, (lastMainDiv) => {
                 $('#mapid').css({'animation':'example 1s 0 alternate'});
                 $('.places').css({'animation':'example 1s 0 alternate'});
                 document.getElementById("searchTextField").disabled = false;
                 $('#searchTextField').val('');
+                console.log('in callback')
+                $(".places").html(lastMainDiv)
             })
         } else {
             addMarker(placeName, () => {

@@ -12,7 +12,7 @@ input.addEventListener("keyup", (event) => {
             loadDashboardStyle()
         }          
         const typeClick = $('.dropdown').find('input').val()
-        console.log(typeClick)
+        // console.log(typeClick)
         if (typeClick=='general') {
             window.location.href = `./dashboard?query=${placeName}`;
             // getLiveOfList(placeName)
@@ -34,6 +34,8 @@ const getLiveOfList = (query, callback) => {
     const fetchingUrli = `http://localhost:9090/department?query=${query}`
 
     $.get(fetchingUrli, (resi, err) => {
+        let lastMainDiv = ''
+
         for (placeNameRes of JSON.parse(resi)) {
 
             const fetchingUrl = `./place?name=${placeNameRes}`
@@ -43,17 +45,20 @@ const getLiveOfList = (query, callback) => {
                 
             if (window.location.href.replace(window.location.search,"")=='http://localhost:9090/dashboard') {
                     insertPlaceObjToLS(new Place(placeNameRes, data=res))
-                    
+                    lastMainDiv += (createPlaceCube(placeNameRes))
+                    // console.log(lastMainDiv)
                     // const place = JSON.parse(localStorage.getItem("place"))
                     addMarker(placeNameRes, () => {
-                        $(".places").html(createPlaceCube(placeNameRes) + $(".places").html())
+                        console.log(placeNameRes)
                         if (placeNameRes==JSON.parse(resi)[JSON.parse(resi).length-1]) {
                             $('#mapid').css({'animation':'example 1s 0 alternate'});
                             $('.places').css({'animation':'example 1s 0 alternate'});
                             document.getElementById("searchTextField").disabled = false;
                             $('#searchTextField').val('');
+                            console.log('before callback')
+                            callback(lastMainDiv)
                         }
-                        // clickPlaceDiv()
+                        clickPlaceDiv()
                     })
                     
                     
@@ -62,13 +67,13 @@ const getLiveOfList = (query, callback) => {
                 
                 
             })
-            console.log(placeNameRes, JSON.parse(resi)[JSON.parse(resi).length-1])
+            // console.log(placeNameRes, JSON.parse(resi)[JSON.parse(resi).length-1])
             
                     // $(".places").html(createPlaceCube(placeNameRes) + $(".places").html())
                     // console.log(placeNameRes)
         }
         
-       
+        // $(".places").html(lastMainDiv)
     })
         
         }
@@ -77,7 +82,7 @@ const getLive = (placeName, callback) => {
     const fetchingUrl = `./place?name=${placeName}`
 
     $.get(fetchingUrl, (res, err) => {        
-        console.log(res)
+        // console.log(res)
         if (res['error']) {
             try {
                 $('#mapid').css({'animation':'example 1s 0 alternate'});
